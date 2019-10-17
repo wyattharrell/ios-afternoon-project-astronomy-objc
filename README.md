@@ -53,5 +53,5 @@ If you finish early or want to push yourself, here are a few additional features
 - Create a framework for the model and networking code, which is platform-independent (ie. should work fine on macOS and tvOS)
 - Implement UI to allow the user to see all available rovers and select them
 - Modify your `Cache` class so that it can be configured to evict old entries if its size gets too big. This prevents the app from using too much memory due to a lot of cached data.
-- Investigate and implement the use of the system-provided `URLCache` API for caching instead of your own cache class. What benefit does this provide? Downsides?
+- Investigate and implement the use of the system-provided `NSCache` API for caching instead of your own cache class. What benefit does this provide? Downsides?
 - Support pinch-to-zoom on the detail view controller.
