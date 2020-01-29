@@ -50,7 +50,14 @@ For part 2 of the project, you'll add additional features to continue your pract
 #### Guidelines and Requirements
 
 1. If you haven't already done so, use the `NSOperation`-based image loading system coverred in the Concurrency modules. If you do this, you must write the code in Objective-C. 
-    - Note that the `ConcurrentOperation` subclass is not required. Your Objective-C `NSOperation` subclass should override `isAsynchronous` to return `YES`, then directly set the `ready`, `executing` and `finished` properties as appropriate during its execution. These properties are observed by the `NSOperationQueue` machinery using KVO, and therefore your use of them must be KVO-compliant.
+    - Note that the `ConcurrentOperation` subclass is not required. Your Objective-C `NSOperation` subclass should override `isAsynchronous` to return `YES`, then update the `ready`, `executing` and `finished` properties during the `NSURLSessionDataTask`'s execution. These properties are observed by the `NSOperationQueue` machinery using KVO, and therefore your use of them must be KVO-compliant.
+    
+    - KVO is tricky with the Async NSOperation. Read: https://developer.apple.com/documentation/foundation/nsoperation 
+    - You’ll need to use your own internal variables to manage state, since isExecuting and other properties are read only
+    - To make sure you trigger KVO messages, you need to also implement special methods to tell the observer that [dependent properties (your internal properties)](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/KeyValueObserving/Articles/KVODependentKeys.html#//apple_ref/doc/uid/20002179-BAJEAIEE) can change values.
+    - If you don't see images in your UI, using your NSOperation subclass, but the operation executes, it could be that you haven't correctly setup your dependent properties using the guide above.
+    
+    
 2. Your app should allow the user to move between sols.
 
 ## Go Further
