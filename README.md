@@ -27,11 +27,6 @@ The instructions for this project are intentionally sparse. At this point in the
 
 ### Part 1 - Swift <-> Objective-C Interoperability
 
-BREAKING NASA links: the links below may not work, NASA has updated the site, look for Mars Rover or photos API. https://github.com/chrisccerami/mars-photo-api 
-
-> You do not need to authenticate in order to explore the NASA data at https://api.nasa.gov/mars-photos/. However, if you will be intensively using the APIs to, say, support a mobile application, then you should sign up for a NASA developer key. You can include this API key in a request with a query parameter api_key=<YOUR_KEY>.
-
-
 **For part 1 of the project, implement a client for the NASA Mars rover API.** You will find API documentation here: https://api.nasa.gov/ (Mars photos) You'll need an API key, which you can get by signing up here: https://api.nasa.gov/index.html#apply-for-an-api-key
 
 NOTE: Before you begin, make sure you understand what API endpoints you need to call and the data you need to display. Test the Swift version so you understand the behavior you need to create in Objective-C.
