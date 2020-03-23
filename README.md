@@ -37,6 +37,7 @@ NOTE: Before you begin, make sure you understand what API endpoints you need to 
     - The rest of the model, networking, and view components must be written in Objective-C.
 2. Your Objective-C code must be thoroughly annotated for nullability and generics.
 3. You must cache images using a custom cache class written in Objective-C. It should be a generic type so it can be used with any type.
+4. You can use any of the files in the "LambdaSDK" folder (Move these files into an appropriate spot within your Xcode project).
 
 ### Part 2 - Additional Enhancements
 
@@ -44,7 +45,7 @@ For part 2 of the project, you'll add additional features to continue your pract
 
 #### Guidelines and Requirements
 
-1. If you haven't already done so, use the `NSOperation`-based image loading system coverred in the Concurrency modules. If you do this, you must write the code in Objective-C. 
+1. If you haven't already done so, use the `NSOperation`-based image loading system covered in the Concurrency modules. If you do this, you must write the code in Objective-C. 
     - Note that the `ConcurrentOperation` subclass is not required. Your Objective-C `NSOperation` subclass should override `isAsynchronous` to return `YES`, then update the `ready`, `executing` and `finished` properties during the `NSURLSessionDataTask`'s execution. These properties are observed by the `NSOperationQueue` machinery using KVO, and therefore your use of them must be KVO-compliant.
     
     - KVO is tricky with the Async NSOperation. Read: https://developer.apple.com/documentation/foundation/nsoperation 
