@@ -36,8 +36,10 @@ NOTE: Before you begin, make sure you understand what API endpoints you need to 
 1. Implement the app in Objective-C with the exception of the main collection view controller, the detail view controller, and one model type of your choice. 
     - The rest of the model, networking, and view components must be written in Objective-C.
 2. Your Objective-C code must be thoroughly annotated for nullability and generics.
-3. You must cache images using a custom cache class written in Objective-C. It should be a generic type so it can be used with any type.
-4. You can use any of the files in the "LambdaSDK" folder (Move these files into an appropriate spot within your Xcode project).
+3. You can use any of the files in the "LambdaSDK" folder (Move these files into an appropriate spot within your Xcode project).
+4. Focus on making the three web requests (manifest, photo list for a sol, download a photo) and populate your data models.
+5. Create the detail view controller with one of the images from a sol (Sol 10 and 12 are smaller photo sets)
+    ![Astronomy Detail View](https://tk-assets.lambdaschool.com/dc4de45a-5983-482b-a25a-56b0031819ff_Astronomy-Detail-View.png)
 
 ### Part 2 - Additional Enhancements
 
@@ -45,7 +47,9 @@ For part 2 of the project, you'll add additional features to continue your pract
 
 #### Guidelines and Requirements
 
-1. If you haven't already done so, use the `NSOperation`-based image loading system covered in the Concurrency modules. If you do this, you must write the code in Objective-C. 
+1. Create your main collection view controller
+    ![Astronomy Collection View](https://tk-assets.lambdaschool.com/8e294071-8e62-4b4b-b522-8d54a814ebe5_Astronomy-Collection-View.png)
+2. If you haven't already done so, use the `NSOperation`-based image loading system covered in the Concurrency modules. If you do this, you must write the code in Objective-C. 
     - Note that the `ConcurrentOperation` subclass is not required. Your Objective-C `NSOperation` subclass should override `isAsynchronous` to return `YES`, then update the `ready`, `executing` and `finished` properties during the `NSURLSessionDataTask`'s execution. These properties are observed by the `NSOperationQueue` machinery using KVO, and therefore your use of them must be KVO-compliant.
     
     - KVO is tricky with the Async NSOperation. Read: https://developer.apple.com/documentation/foundation/nsoperation 
@@ -54,7 +58,8 @@ For part 2 of the project, you'll add additional features to continue your pract
     - If you don't see images in your UI, using your NSOperation subclass, but the operation executes, it could be that you haven't correctly setup your dependent properties using the guide above.
     
     
-2. Your app should allow the user to move between sols.
+3. Your app should allow the user to move between sols.
+4. You must cache images using a custom cache class written in Objective-C. It should be a generic type so it can be used with any type.
 
 ## Go Further
 
