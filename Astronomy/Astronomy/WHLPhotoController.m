@@ -10,7 +10,6 @@
 #import <UIKit/UIKit.h>
 #import "Astronomy-Bridging-Header.h"
 #import "LSIErrors.h"
-#import "Photo.swift"
 
 NSString *baseURLString = @"https://api.nasa.gov/mars-photos/api/v1/";
 NSString *apiKey = @"3MYY5NPWds1kZu7B3B7In88FKEHYXncJQkgBFNr6";
