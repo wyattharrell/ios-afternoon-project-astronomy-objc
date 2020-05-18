@@ -69,6 +69,8 @@
 		134917EA2473152100B3A2C6 /* Astronomy */ = {
 			isa = PBXGroup;
 			children = (
+				1349181724731E7600B3A2C6 /* Model Controllers */,
+				1349181624731E6D00B3A2C6 /* Models */,
 				1349181524731BFA00B3A2C6 /* Helper Files */,
 				134918042473154F00B3A2C6 /* Application */,
 				134918052473156B00B3A2C6 /* Storyboards */,
@@ -127,6 +129,20 @@
 				1349181324731BF600B3A2C6 /* LSIErrors.m */,
 			);
 			path = "Helper Files";
+			sourceTree = "<group>";
+		};
+		1349181624731E6D00B3A2C6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1349181724731E7600B3A2C6 /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Model Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
