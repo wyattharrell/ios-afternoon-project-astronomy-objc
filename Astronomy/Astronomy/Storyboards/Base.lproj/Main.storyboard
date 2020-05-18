@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -157,27 +158,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="37H-Da-wvW">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="119" width="414" height="743"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5h9-cN-Ep9">
-                                    <size key="itemSize" width="150" height="150"/>
+                                    <size key="itemSize" width="185" height="185"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="9cS-hx-RUg" customClass="PhotoCollectionViewCell">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                        <rect key="frame" x="8" y="8" width="185" height="185"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eXg-Za-wSH">
+                                            <rect key="frame" x="0.0" y="0.0" width="185" height="185"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tp3-tt-5ng">
-                                                    <rect key="frame" x="8" y="8" width="134" height="134"/>
+                                                    <rect key="frame" x="8" y="8" width="169" height="169"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CgT-lr-sWD">
-                                                            <rect key="frame" x="0.0" y="0.0" width="134" height="134"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="169" height="169"/>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -189,13 +190,13 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstItem="tp3-tt-5ng" firstAttribute="leading" secondItem="9cS-hx-RUg" secondAttribute="leading" constant="8" id="HlQ-uY-mgM"/>
-                                            <constraint firstAttribute="bottom" secondItem="tp3-tt-5ng" secondAttribute="bottom" constant="8" id="JJ4-vr-SGB"/>
-                                            <constraint firstItem="tp3-tt-5ng" firstAttribute="top" secondItem="9cS-hx-RUg" secondAttribute="top" constant="8" id="hXp-xc-SyD"/>
-                                            <constraint firstAttribute="trailing" secondItem="tp3-tt-5ng" secondAttribute="trailing" constant="8" id="jQv-e9-ic1"/>
-                                        </constraints>
+                                            <constraints>
+                                                <constraint firstItem="tp3-tt-5ng" firstAttribute="leading" secondItem="eXg-Za-wSH" secondAttribute="leading" constant="8" id="HlQ-uY-mgM"/>
+                                                <constraint firstAttribute="bottom" secondItem="tp3-tt-5ng" secondAttribute="bottom" constant="8" id="JJ4-vr-SGB"/>
+                                                <constraint firstItem="tp3-tt-5ng" firstAttribute="top" secondItem="eXg-Za-wSH" secondAttribute="top" constant="8" id="hXp-xc-SyD"/>
+                                                <constraint firstAttribute="trailing" secondItem="tp3-tt-5ng" secondAttribute="trailing" constant="8" id="jQv-e9-ic1"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="imageBackgroundView" destination="tp3-tt-5ng" id="EWK-YN-aN2"/>
                                             <outlet property="imageView" destination="CgT-lr-sWD" id="bJc-fm-joQ"/>
@@ -208,20 +209,41 @@
                                     <outlet property="delegate" destination="rzx-pW-Dpz" id="IOF-He-QQr"/>
                                 </connections>
                             </collectionView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Wc5-9P-36S">
+                                <rect key="frame" x="0.0" y="88" width="414" height="32"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                                <connections>
+                                    <action selector="cameraSegmentedControlChanged:" destination="rzx-pW-Dpz" eventType="valueChanged" id="Ko4-CE-eid"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="Wc5-9P-36S" firstAttribute="trailing" secondItem="bik-BZ-ihb" secondAttribute="trailing" id="56E-Hs-Cfv"/>
+                            <constraint firstItem="Wc5-9P-36S" firstAttribute="leading" secondItem="bik-BZ-ihb" secondAttribute="leading" id="EkJ-gl-yJf"/>
+                            <constraint firstItem="Wc5-9P-36S" firstAttribute="top" secondItem="bik-BZ-ihb" secondAttribute="top" id="Fi6-6k-fc8"/>
+                            <constraint firstItem="37H-Da-wvW" firstAttribute="top" secondItem="Wc5-9P-36S" secondAttribute="bottom" id="JNu-B3-I4u"/>
                             <constraint firstItem="bik-BZ-ihb" firstAttribute="trailing" secondItem="37H-Da-wvW" secondAttribute="trailing" id="d2f-fr-fA3"/>
                             <constraint firstItem="bik-BZ-ihb" firstAttribute="bottom" secondItem="37H-Da-wvW" secondAttribute="bottom" id="hw1-GW-zQY"/>
                             <constraint firstItem="37H-Da-wvW" firstAttribute="leading" secondItem="bik-BZ-ihb" secondAttribute="leading" id="jr8-tR-OzX"/>
-                            <constraint firstItem="37H-Da-wvW" firstAttribute="top" secondItem="bik-BZ-ihb" secondAttribute="top" id="kHl-MV-22U"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bik-BZ-ihb"/>
                     </view>
                     <navigationItem key="navigationItem" title="Sol #" id="aAm-if-VmJ">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="arrow.left.circle.fill" catalog="system" id="EgG-OS-SS7"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="arrow.left.circle.fill" catalog="system" id="EgG-OS-SS7">
+                            <connections>
+                                <action selector="previousSolButtonTapped:" destination="rzx-pW-Dpz" id="1YF-kI-gSc"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem title="Item" image="arrow.right.circle.fill" catalog="system" id="7s8-Y5-2QX"/>
+                            <barButtonItem title="Item" image="arrow.right.circle.fill" catalog="system" id="7s8-Y5-2QX">
+                                <connections>
+                                    <action selector="nextSolButtonTapped:" destination="rzx-pW-Dpz" id="MiA-y3-gvi"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem title="Testing" id="jMb-0k-Pff">
                                 <connections>
                                     <segue destination="C4k-M2-WCG" kind="show" id="6AW-80-Jnn"/>
@@ -230,7 +252,10 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="cameraSegmentedControl" destination="Wc5-9P-36S" id="Ir7-Al-GFn"/>
                         <outlet property="collectionView" destination="37H-Da-wvW" id="wPY-K5-prN"/>
+                        <outlet property="nextSolButton" destination="7s8-Y5-2QX" id="QCx-ml-VPO"/>
+                        <outlet property="previousSolButton" destination="EgG-OS-SS7" id="g2h-gT-7aF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OlX-ON-6uf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -12,6 +12,9 @@ class PhotosViewController: UIViewController {
 
     // MARK: - IBOutlets
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var previousSolButton: UIBarButtonItem!
+    @IBOutlet var nextSolButton: UIBarButtonItem!
+    @IBOutlet var cameraSegmentedControl: UISegmentedControl!
     
     // MARK: - Properties
     let photoController = WHLPhotoController()
@@ -19,6 +22,7 @@ class PhotosViewController: UIViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        previousSolButton.isEnabled = false
         
         photoController.fetchManifest { (error) in
             if let error = error {
@@ -37,12 +41,30 @@ class PhotosViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowPhotoDetailSegue" {
             guard let photoDetailVC = segue.destination as? PhotoDetailViewController else { return }
-            guard let selected = collectionView.indexPathsForSelectedItems else { return }
+            // guard let selected = collectionView.indexPathsForSelectedItems else { return }
             // photoDetailVC.photo = controller.photos[selected[0].row]
             photoDetailVC.photoController = photoController
         }
     }
-
+    
+    // MARK: - Private Methods
+    private func setupSegmentedControl() {
+        
+    }
+    
+    // MARK: - IBActions
+    @IBAction func previousSolButtonTapped(_ sender: Any) {
+        
+    }
+    
+    @IBAction func nextSolButtonTapped(_ sender: Any) {
+        
+    }
+    
+    @IBAction func cameraSegmentedControlChanged(_ sender: Any) {
+        
+    }
+    
 }
 
 extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDelegate {
