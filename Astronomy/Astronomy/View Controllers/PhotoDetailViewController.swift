@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class PhotoDetailViewController: UIViewController {
 
@@ -19,6 +20,8 @@ class PhotoDetailViewController: UIViewController {
     @IBOutlet var solLabel: UILabel!
     @IBOutlet var cameraLabel: UILabel!
     
+    // MARK: - Properties
+    let photoController = WHLPhotoController()
     var photo: Photo? {
         didSet {
             updateViews()
@@ -30,6 +33,7 @@ class PhotoDetailViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         updateViews()
+        testFetch()
     }
     
     // MARK: - Private Methods
@@ -47,8 +51,47 @@ class PhotoDetailViewController: UIViewController {
     }
     
     private func updateViews() {
-        if isViewLoaded {
+        guard isViewLoaded else { return }
+    }
+    
+    private func testFetch() {
+        let url = URL(string: "https://mars.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00012/opgs/edr/ccam/CR0_398560983EDR_F0030004CCAM03012M_.JPG")!
+        photoController.fetchSinglePhoto(with: url) { (error, image) in
+            if let error = error {
+                NSLog("Error fetching photo: \(error)")
+            }
             
+            if let image = image {
+                DispatchQueue.main.async {
+                    self.imageView.image = image
+                }
+            }
+        }
+    }
+    
+    // MARK: - IBActions
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        guard let image = imageView.image else { return }
+        
+        PHPhotoLibrary.requestAuthorization { (status) in
+            switch status {
+            case .authorized:
+                PHPhotoLibrary.shared().performChanges({
+                    PHAssetChangeRequest.creationRequestForAsset(from: image)
+                }, completionHandler: { (success, error) in
+                    if let error = error {
+                        NSLog("Error saving photo: \(error)")
+                        return
+                    }
+                })
+            default:
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Cannot save image", message: "Astronomy does not have access to your Photo Library. Please change this in Settings if you would like to save images.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                break
+            }
         }
     }
     
