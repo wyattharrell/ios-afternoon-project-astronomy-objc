@@ -11,7 +11,8 @@
 #import "Astronomy-Bridging-Header.h"
 
 
-NSString *baseURLString = @"https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/";
+NSString *baseURLString = @"https://api.nasa.gov/mars-photos/api/v1/";
+NSString *apiKey = @"3MYY5NPWds1kZu7B3B7In88FKEHYXncJQkgBFNr6";
 
 @implementation WHLPhotoController
 
@@ -46,6 +47,27 @@ NSString *baseURLString = @"https://api.nasa.gov/mars-photos/api/v1/rovers/curio
 }
 
 - (void)fetchManifest:(void (^)(NSError * _Nullable))completionBlock {
-    
+
+    NSURL *baseURL = [[NSURL URLWithString:baseURLString] URLByAppendingPathComponent:@"manifests/curiosity"];
+
+    NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:baseURL resolvingAgainstBaseURL:NO];
+
+    urlComponents.queryItems = @[
+        [NSURLQueryItem queryItemWithName:@"api_key" value:apiKey]
+    ];
+
+
+    NSURL *requestURL = urlComponents.URL;
+
+    NSURLSessionTask *task = [NSURLSession.sharedSession dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSLog(@"Inside of fetchManifest method with url: %@", requestURL);
+
+        if (error) {
+            completionBlock(error);
+            return;
+        }
+    }];
+
+    [task resume];
 }
 @end
