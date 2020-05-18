@@ -20,7 +20,8 @@ NSString *apiKey = @"3MYY5NPWds1kZu7B3B7In88FKEHYXncJQkgBFNr6";
 {
     self = [super init];
     if (self) {
-        _photos = [[NSMutableArray alloc] init];
+        _photos = [[NSMutableArray<Photo *> alloc] init];
+        _manifests = [[NSMutableArray<WHLManifest *> alloc] init];
     }
     return self;
 }
