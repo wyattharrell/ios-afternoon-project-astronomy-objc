@@ -15,6 +15,12 @@
 NSString *baseURLString = @"https://api.nasa.gov/mars-photos/api/v1/";
 NSString *apiKey = @"3MYY5NPWds1kZu7B3B7In88FKEHYXncJQkgBFNr6";
 
+@interface WHLPhotoController ()
+
+@property (nonatomic, readonly, nonnull) NSDateFormatter *dateFormatter;
+
+@end
+
 @implementation WHLPhotoController
 
 - (instancetype)init
@@ -23,12 +29,17 @@ NSString *apiKey = @"3MYY5NPWds1kZu7B3B7In88FKEHYXncJQkgBFNr6";
     if (self) {
         _photos = [[NSMutableArray<Photo *> alloc] init];
         _manifests = [[NSMutableArray<WHLManifest *> alloc] init];
+
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+        _dateFormatter = formatter;
+
     }
     return self;
 }
 
 - (void)fetchSinglePhotoWithURL:(NSURL *)imgSrc
-                 completionBlock:(void (^)(NSError * _Nullable error, UIImage * _Nullable image))completionBlock{
+                completionBlock:(void (^)(NSError * _Nullable error, UIImage * _Nullable image))completionBlock{
 
     NSURLSessionDataTask *task = [NSURLSession.sharedSession dataTaskWithURL:imgSrc completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSLog(@"Inside of datatask completionHandler with url: %@", imgSrc);
@@ -102,6 +113,8 @@ NSString *apiKey = @"3MYY5NPWds1kZu7B3B7In88FKEHYXncJQkgBFNr6";
 
                 [self.manifests addObject:newManifest];
             }
+#warning program won't alert when the nil checker and will move on to the next object in the array
+            // TODO:- Add else statement to handle an attribute being nil
         }
 
         completionBlock(nil);
@@ -124,35 +137,66 @@ NSString *apiKey = @"3MYY5NPWds1kZu7B3B7In88FKEHYXncJQkgBFNr6";
 
     NSURL *requestURL = urlComponents.URL;
 
-       NSURLSessionTask *task = [NSURLSession.sharedSession dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-           NSLog(@"Inside of fetchManifest method with url: %@", requestURL);
+    NSURLSessionTask *task = [NSURLSession.sharedSession dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSLog(@"Inside of fetchManifest method with url: %@", requestURL);
 
-           if (error) {
-               completionBlock(error);
-               return;
-           }
+        if (error) {
+            completionBlock(error);
+            return;
+        }
 
-           if (!data) {
-               completionBlock(errorWithMessage(@"Error receiving data from sol fetch request", 1));
-               return;
-           }
+        if (!data) {
+            completionBlock(errorWithMessage(@"Error receiving data from sol fetch request", 1));
+            return;
+        }
 
-           NSError *jsonError = nil;
+        NSError *jsonError = nil;
 
-           NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
 
-           if (jsonError) {
-               completionBlock(jsonError);
-               return;
-           }
+        if (jsonError) {
+            completionBlock(jsonError);
+            return;
+        }
 
+        NSArray *photosArray = json[@"photos"];
 
+        for (NSDictionary *photoDict in photosArray) {
+            NSNumber *sol = photoDict[@"sol"];
+            if([sol isKindOfClass:[NSNull class]]) { sol = nil; }
 
-           completionBlock(nil);
+            NSDictionary *camera = photoDict[@"camera"];
+            NSString *cameraName = camera[@"name"];
+            if([cameraName isKindOfClass:[NSNull class]]) { cameraName = nil; }
 
-       }];
+            NSString *cameraFullName = camera[@"full_name"];
+            if([cameraFullName isKindOfClass:[NSNull class]]) { cameraFullName = nil; }
 
-       [task resume];
+            NSDate *photoDate = [self.dateFormatter dateFromString:photoDict[@"earth_date"]];
+            if([photoDate isKindOfClass:[NSNull class]]) { photoDate = nil; }
+
+            NSURL *imgSrc = [NSURL URLWithString:photoDict[@"img_src"]];
+            if([imgSrc isKindOfClass:[NSNull class]]) { imgSrc = nil; }
+
+            NSDictionary *rover = photoDict[@"rover"];
+            NSNumber *roverID = rover[@"id"];
+            if([roverID isKindOfClass:[NSNull class]]) { roverID = nil; }
+
+            NSString *roverName = rover[@"name"];
+            if([roverName isKindOfClass:[NSNull class]]) { roverName = nil; }
+
+            if (sol && cameraName && cameraFullName && photoDate && imgSrc && roverID && roverName) {
+//                Photo *newPhoto = [[Photo alloc] init];
+            }
+#warning program won't alert when the nil checker and will move on to the next object in the array
+            // TODO:- Add else statement to handle an attribute being nil
+        }
+
+        completionBlock(nil);
+
+    }];
+
+    [task resume];
 
 
 }
