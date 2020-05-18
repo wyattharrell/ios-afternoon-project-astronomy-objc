@@ -7,8 +7,11 @@
 //
 
 #import "WHLPhotoController.h"
+#import <UIKit/UIKit.h>
 #import "Astronomy-Bridging-Header.h"
 
+
+NSString *baseURLString = @"";
 
 @implementation WHLPhotoController
 
@@ -21,4 +24,24 @@
     return self;
 }
 
+- (void)fetchSinglePhotoWithURL:(NSURL *)imgSrc
+                 completionBlock:(void (^)(NSError * _Nullable error, UIImage * _Nullable image))completionBlock{
+
+    NSURLSessionDataTask *task = [NSURLSession.sharedSession dataTaskWithURL:imgSrc completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSLog(@"Inside of datatask completionHandler with url: %@", imgSrc);
+
+        if (error) {
+            completionBlock(error, nil);
+            return;
+        }
+
+        if (data) {
+            UIImage *image = [UIImage imageWithData:data];
+            completionBlock(nil, image);
+            return;
+        }
+    }];
+
+    [task resume];
+}
 @end
