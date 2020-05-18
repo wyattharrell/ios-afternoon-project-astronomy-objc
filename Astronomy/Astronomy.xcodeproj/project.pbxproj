@@ -19,6 +19,7 @@
 		1349181424731BF600B3A2C6 /* LSIErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 1349181324731BF600B3A2C6 /* LSIErrors.m */; };
 		9CB52002247321E400EBC07E /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB52001247321E400EBC07E /* Photo.swift */; };
 		9CB520052473266700EBC07E /* WHLPhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB520042473266700EBC07E /* WHLPhotoController.m */; };
+		9CB52008247336D700EBC07E /* WHLManifest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB52007247336D700EBC07E /* WHLManifest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,8 @@
 		9CB52001247321E400EBC07E /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Photo.swift; path = Astronomy/Photo.swift; sourceTree = SOURCE_ROOT; };
 		9CB520032473266700EBC07E /* WHLPhotoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WHLPhotoController.h; path = Astronomy/WHLPhotoController.h; sourceTree = SOURCE_ROOT; };
 		9CB520042473266700EBC07E /* WHLPhotoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WHLPhotoController.m; path = Astronomy/WHLPhotoController.m; sourceTree = SOURCE_ROOT; };
+		9CB52006247336D700EBC07E /* WHLManifest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WHLManifest.h; path = Astronomy/WHLManifest.h; sourceTree = SOURCE_ROOT; };
+		9CB52007247336D700EBC07E /* WHLManifest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WHLManifest.m; path = Astronomy/WHLManifest.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				9CB52001247321E400EBC07E /* Photo.swift */,
+				9CB52006247336D700EBC07E /* WHLManifest.h */,
+				9CB52007247336D700EBC07E /* WHLManifest.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -228,6 +233,7 @@
 				1349181124731B3F00B3A2C6 /* PhotoCollectionViewCell.m in Sources */,
 				134917ED2473152100B3A2C6 /* AppDelegate.m in Sources */,
 				134917FE2473152200B3A2C6 /* main.m in Sources */,
+				9CB52008247336D700EBC07E /* WHLManifest.m in Sources */,
 				1349181424731BF600B3A2C6 /* LSIErrors.m in Sources */,
 				134917F02473152100B3A2C6 /* SceneDelegate.m in Sources */,
 				1349180B247315FD00B3A2C6 /* PhotoDetailViewController.swift in Sources */,
