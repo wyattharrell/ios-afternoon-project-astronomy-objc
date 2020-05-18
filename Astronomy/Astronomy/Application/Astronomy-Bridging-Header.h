@@ -4,3 +4,4 @@
 
 #import "WHLPhotoController.h"
 #import "WHLManifest.h"
+#import "PhotoCollectionViewCell.h"

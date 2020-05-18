@@ -23,7 +23,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="TlN-u9-Tct" customClass="PhotoCollectionViewCell">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="TlN-u9-Tct" customClass="PhotoCollectionViewCell">
                                 <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="REy-4Q-w9M">
@@ -54,6 +54,8 @@
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <connections>
+                                    <outlet property="imageBackgroundView" destination="9UQ-kZ-d5U" id="sWO-bD-nyl"/>
+                                    <outlet property="imageView" destination="qix-wF-9vj" id="XSJ-39-buY"/>
                                     <segue destination="C4k-M2-WCG" kind="show" id="748-t1-fUd"/>
                                 </connections>
                             </collectionViewCell>
