@@ -8,8 +8,9 @@
 
 #import "WHLPhotoController.h"
 #import <UIKit/UIKit.h>
-#import "Astronomy-Bridging-Header.h"
 #import "LSIErrors.h"
+#import "Astronomy-Swift.h"
+#import "WHLManifest.h"
 
 NSString *baseURLString = @"https://api.nasa.gov/mars-photos/api/v1/";
 NSString *apiKey = @"3MYY5NPWds1kZu7B3B7In88FKEHYXncJQkgBFNr6";
@@ -185,7 +186,7 @@ NSString *apiKey = @"3MYY5NPWds1kZu7B3B7In88FKEHYXncJQkgBFNr6";
             if([roverName isKindOfClass:[NSNull class]]) { roverName = nil; }
 
             if (sol && cameraName && cameraFullName && photoDate && imgSrc && roverID && roverName) {
-//                Photo *newPhoto = [[Photo alloc] init];
+//                Photo *newPhoto = [[Photo alloc] initWithSol:<#(NSInteger)#> cameraName:<#(NSString * _Nonnull)#> cameraFullName:<#(NSString * _Nonnull)#> photoDate:<#(NSDate * _Nonnull)#> imgSrc:<#(NSURL * _Nonnull)#> roverID:<#(NSInteger)#> roverName:<#(NSString * _Nonnull)#>];
             }
 #warning program won't alert when the nil checker and will move on to the next object in the array
             // TODO:- Add else statement to handle an attribute being nil
