@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "Astronomy-Bridging-Header.h"
 #import "LSIErrors.h"
+#import "Photo.swift"
 
 NSString *baseURLString = @"https://api.nasa.gov/mars-photos/api/v1/";
 NSString *apiKey = @"3MYY5NPWds1kZu7B3B7In88FKEHYXncJQkgBFNr6";
@@ -108,5 +109,51 @@ NSString *apiKey = @"3MYY5NPWds1kZu7B3B7In88FKEHYXncJQkgBFNr6";
     }];
 
     [task resume];
+}
+
+- (void)fetchSolByManifest:(WHLManifest *)manifest completionBlock:(void (^)(NSError * _Nullable))completionBlock {
+
+    NSURL *baseURL = [[NSURL URLWithString:baseURLString] URLByAppendingPathComponent:@"rovers/curiosity/photos"];
+
+    NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:baseURL resolvingAgainstBaseURL:NO];
+
+    urlComponents.queryItems = @[
+        [NSURLQueryItem queryItemWithName:@"sol" value:[NSString stringWithFormat:@"%d", manifest.solID]],
+        [NSURLQueryItem queryItemWithName:@"api_key" value:apiKey]
+    ];
+
+    NSURL *requestURL = urlComponents.URL;
+
+       NSURLSessionTask *task = [NSURLSession.sharedSession dataTaskWithURL:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+           NSLog(@"Inside of fetchManifest method with url: %@", requestURL);
+
+           if (error) {
+               completionBlock(error);
+               return;
+           }
+
+           if (!data) {
+               completionBlock(errorWithMessage(@"Error receiving data from sol fetch request", 1));
+               return;
+           }
+
+           NSError *jsonError = nil;
+
+           NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+
+           if (jsonError) {
+               completionBlock(jsonError);
+               return;
+           }
+
+
+
+           completionBlock(nil);
+
+       }];
+
+       [task resume];
+
+
 }
 @end
