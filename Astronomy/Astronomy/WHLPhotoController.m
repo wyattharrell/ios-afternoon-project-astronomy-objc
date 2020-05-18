@@ -7,7 +7,18 @@
 //
 
 #import "WHLPhotoController.h"
+#import "Astronomy-Bridging-Header.h"
+
 
 @implementation WHLPhotoController
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _photos = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
 
 @end
