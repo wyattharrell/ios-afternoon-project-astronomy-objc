@@ -3,3 +3,4 @@
 //
 
 #import "WHLPhotoController.h"
+#import "WHLManifest.h"

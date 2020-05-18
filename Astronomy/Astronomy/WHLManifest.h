@@ -16,6 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) int photoCount;
 @property (nonatomic, readonly, copy) NSArray<NSString *> *cameras;
 
+- (instancetype)initWithSolID:(int)solID
+                   photoCount:(int)photoCount
+                      cameras:(NSArray<NSString *> *)cameras;
+
 @end
 
 NS_ASSUME_NONNULL_END
