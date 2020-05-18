@@ -21,7 +21,7 @@ class PhotoDetailViewController: UIViewController {
     @IBOutlet var cameraLabel: UILabel!
     
     // MARK: - Properties
-    let photoController = WHLPhotoController()
+    var photoController: WHLPhotoController?
     var photo: Photo? {
         didSet {
             updateViews()
@@ -56,7 +56,7 @@ class PhotoDetailViewController: UIViewController {
     
     private func testFetch() {
         let url = URL(string: "https://mars.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00012/opgs/edr/ccam/CR0_398560983EDR_F0030004CCAM03012M_.JPG")!
-        photoController.fetchSinglePhoto(with: url) { (error, image) in
+        photoController?.fetchSinglePhoto(with: url) { (error, image) in
             if let error = error {
                 NSLog("Error fetching photo: \(error)")
             }

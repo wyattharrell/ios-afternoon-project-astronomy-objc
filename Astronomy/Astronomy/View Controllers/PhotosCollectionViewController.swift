@@ -10,9 +10,18 @@ import UIKit
 
 class PhotosCollectionViewController: UICollectionViewController {
 
+    // MARK: - Properties
+    let photoController = WHLPhotoController()
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        photoController.fetchManifest { (error) in
+            if let error = error {
+                NSLog("Error fetching manifest \(error)")
+            }
+        }
     }
 
     // MARK: - Navigation
@@ -21,6 +30,7 @@ class PhotosCollectionViewController: UICollectionViewController {
             guard let photoDetailVC = segue.destination as? PhotoDetailViewController else { return }
             guard let selected = collectionView.indexPathsForSelectedItems else { return }
             // photoDetailVC.photo = controller.photos[selected[0].row]
+            photoDetailVC.photoController = photoController
         }
     }
 
