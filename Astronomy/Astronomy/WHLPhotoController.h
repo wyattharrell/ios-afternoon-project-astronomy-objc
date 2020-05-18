@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)fetchSinglePhotoWithURL:(NSURL *)imgSrc
                  completionBlock:(void (^)(NSError * _Nullable error, UIImage * _Nullable image))completionBlock;
 
+- (void)fetchManifest:(void (^)(NSError * _Nullable error))completionBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END
