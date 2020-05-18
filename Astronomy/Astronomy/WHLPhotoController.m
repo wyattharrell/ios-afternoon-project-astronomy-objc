@@ -11,7 +11,7 @@
 #import "Astronomy-Bridging-Header.h"
 
 
-NSString *baseURLString = @"";
+NSString *baseURLString = @"https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/";
 
 @implementation WHLPhotoController
 
@@ -43,5 +43,9 @@ NSString *baseURLString = @"";
     }];
 
     [task resume];
+}
+
+- (void)fetchManifest:(void (^)(NSError * _Nullable))completionBlock {
+    
 }
 @end
