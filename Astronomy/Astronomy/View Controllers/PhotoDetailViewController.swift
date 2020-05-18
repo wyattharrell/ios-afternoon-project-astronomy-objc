@@ -10,23 +10,46 @@ import UIKit
 
 class PhotoDetailViewController: UIViewController {
 
+    // MARK: - IBOutlets
+    @IBOutlet var saveButton: UIButton!
+    @IBOutlet var backgroundView: UIView!
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var roverLabel: UILabel!
+    @IBOutlet var solLabel: UILabel!
+    @IBOutlet var cameraLabel: UILabel!
+    
+    var photo: Photo? {
+        didSet {
+            updateViews()
+        }
+    }
+    
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        print("Potato")
+        setupViews()
+        updateViews()
     }
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    // MARK: - Private Methods
+    private func setupViews() {
+        saveButton.layer.cornerRadius = 8
+        backgroundView.layer.cornerRadius = 8
+        backgroundView.layer.shadowColor = UIColor.lightGray.cgColor
+        backgroundView.layer.shadowOpacity = 1
+        backgroundView.layer.shadowOffset = .zero
+        backgroundView.layer.shadowRadius = 8
+        imageView.layer.cornerRadius = 8
+        backgroundView.layer.masksToBounds = false
+        backgroundView.backgroundColor = UIColor.white
+        imageView.clipsToBounds = true
     }
-
-
-
-    // MARK: - HECTOR
-
+    
+    private func updateViews() {
+        if isViewLoaded {
+            
+        }
+    }
+    
 }
