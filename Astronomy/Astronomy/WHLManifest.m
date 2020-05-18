@@ -12,7 +12,9 @@
 - (instancetype)initWithSolID:(int)solID photoCount:(int)photoCount cameras:(NSArray<NSString *> *)cameras {
     self = [super init];
     if (self) {
-//        _soldID = ;
+        _solID = solID;
+        _photoCount = photoCount;
+        _cameras = [cameras copy];
     }
     return self;
 }
