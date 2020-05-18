@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Photos-->
+        <!--Sol #-->
         <scene sceneID="8gE-2p-W1B">
             <objects>
                 <collectionViewController id="sGU-EB-i44" customClass="PhotosCollectionViewController" customModule="Astronomy" customModuleProvider="target" sceneMemberID="viewController">
@@ -33,7 +33,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9UQ-kZ-d5U">
                                             <rect key="frame" x="8" y="8" width="134" height="134"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_image" translatesAutoresizingMaskIntoConstraints="NO" id="qix-wF-9vj">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qix-wF-9vj">
                                                     <rect key="frame" x="0.0" y="0.0" width="134" height="134"/>
                                                 </imageView>
                                             </subviews>
@@ -56,7 +56,7 @@
                                 <connections>
                                     <outlet property="imageBackgroundView" destination="9UQ-kZ-d5U" id="sWO-bD-nyl"/>
                                     <outlet property="imageView" destination="qix-wF-9vj" id="XSJ-39-buY"/>
-                                    <segue destination="C4k-M2-WCG" kind="show" id="748-t1-fUd"/>
+                                    <segue destination="C4k-M2-WCG" kind="show" identifier="ShowPhotoDetailSegue" id="748-t1-fUd"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -65,7 +65,7 @@
                             <outlet property="delegate" destination="sGU-EB-i44" id="OkY-ab-LhS"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Photos" id="5wX-d5-8ai">
+                    <navigationItem key="navigationItem" title="Sol #" id="5wX-d5-8ai">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="arrow.left.circle.fill" catalog="system" id="hej-FT-7kJ"/>
                         <rightBarButtonItems>
                             <barButtonItem title="&gt;" image="arrow.right.circle.fill" catalog="system" id="lTj-fh-53D"/>

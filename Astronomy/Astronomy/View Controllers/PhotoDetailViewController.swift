@@ -44,9 +44,9 @@ class PhotoDetailViewController: UIViewController {
         backgroundView.layer.shadowOpacity = 1
         backgroundView.layer.shadowOffset = .zero
         backgroundView.layer.shadowRadius = 8
-        imageView.layer.cornerRadius = 8
         backgroundView.layer.masksToBounds = false
         backgroundView.backgroundColor = UIColor.white
+        imageView.layer.cornerRadius = 8
         imageView.clipsToBounds = true
     }
     
