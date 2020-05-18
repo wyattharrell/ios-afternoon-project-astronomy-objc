@@ -28,4 +28,24 @@ class PhotoDetailViewController: UIViewController {
 
 
     // MARK: - HECTOR
+
+    func hello() {
+
+    }
+
+    func hello2() {
+
+    }
+
+    func hello3() {
+
+    }
+
+    func hello4() {
+
+    }
+
+    func hello5() {
+
+    }
 }
