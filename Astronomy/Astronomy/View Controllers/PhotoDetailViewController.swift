@@ -25,41 +25,8 @@ class PhotoDetailViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
 
-    private func updateViews() {
-        print("Tesing")
-        print("Tesing")
-        print("Tesing")
-        print("Tesing")
-        print("Tesing")
-        print("Tesing")
-        print("Tesing")
-        print("Tesing")
-        print("Tesing")
-        print("Tesing")
-        print("Tesing")
-        print("Tesing")
-    }
 
 
     // MARK: - HECTOR
 
-    func hello() {
-
-    }
-
-    func hello2() {
-
-    }
-
-    func hello3() {
-
-    }
-
-    func hello4() {
-
-    }
-
-    func hello5() {
-
-    }
 }
