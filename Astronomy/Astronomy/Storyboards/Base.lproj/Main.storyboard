@@ -184,6 +184,9 @@
                                 <state key="normal" title="Save to Photo Library">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveButtonTapped:" destination="C4k-M2-WCG" eventType="touchUpInside" id="Ngv-Zz-rt4"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
