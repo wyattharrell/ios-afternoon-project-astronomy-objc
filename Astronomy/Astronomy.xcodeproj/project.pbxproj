@@ -13,6 +13,9 @@
 		134917F82473152200B3A2C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 134917F72473152200B3A2C6 /* Assets.xcassets */; };
 		134917FB2473152200B3A2C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 134917F92473152200B3A2C6 /* LaunchScreen.storyboard */; };
 		134917FE2473152200B3A2C6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 134917FD2473152200B3A2C6 /* main.m */; };
+		13491808247315DB00B3A2C6 /* PhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13491807247315DB00B3A2C6 /* PhotosCollectionViewController.swift */; };
+		1349180B247315FD00B3A2C6 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1349180A247315FD00B3A2C6 /* PhotoDetailViewController.swift */; };
+		1349180D2473167200B3A2C6 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1349180C2473167200B3A2C6 /* PhotoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,10 @@
 		134917FA2473152200B3A2C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		134917FC2473152200B3A2C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		134917FD2473152200B3A2C6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		13491806247315DB00B3A2C6 /* Astronomy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Astronomy-Bridging-Header.h"; sourceTree = "<group>"; };
+		13491807247315DB00B3A2C6 /* PhotosCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewController.swift; sourceTree = "<group>"; };
+		1349180A247315FD00B3A2C6 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
+		1349180C2473167200B3A2C6 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +67,8 @@
 			children = (
 				134918042473154F00B3A2C6 /* Application */,
 				134918052473156B00B3A2C6 /* Storyboards */,
+				13491809247315DF00B3A2C6 /* View Controllers */,
+				1349180E2473167600B3A2C6 /* Views */,
 			);
 			path = Astronomy;
 			sourceTree = "<group>";
@@ -71,6 +80,7 @@
 				134917EC2473152100B3A2C6 /* AppDelegate.m */,
 				134917EE2473152100B3A2C6 /* SceneDelegate.h */,
 				134917EF2473152100B3A2C6 /* SceneDelegate.m */,
+				13491806247315DB00B3A2C6 /* Astronomy-Bridging-Header.h */,
 				134917F72473152200B3A2C6 /* Assets.xcassets */,
 				134917FD2473152200B3A2C6 /* main.m */,
 				134917FC2473152200B3A2C6 /* Info.plist */,
@@ -85,6 +95,23 @@
 				134917F92473152200B3A2C6 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		13491809247315DF00B3A2C6 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				13491807247315DB00B3A2C6 /* PhotosCollectionViewController.swift */,
+				1349180A247315FD00B3A2C6 /* PhotoDetailViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		1349180E2473167600B3A2C6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1349180C2473167200B3A2C6 /* PhotoCollectionViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,6 +145,7 @@
 				TargetAttributes = {
 					134917E72473152100B3A2C6 = {
 						CreatedOnToolsVersion = 11.4.1;
+						LastSwiftMigration = 1140;
 					};
 				};
 			};
@@ -160,6 +188,9 @@
 				134917ED2473152100B3A2C6 /* AppDelegate.m in Sources */,
 				134917FE2473152200B3A2C6 /* main.m in Sources */,
 				134917F02473152100B3A2C6 /* SceneDelegate.m in Sources */,
+				1349180B247315FD00B3A2C6 /* PhotoDetailViewController.swift in Sources */,
+				13491808247315DB00B3A2C6 /* PhotosCollectionViewController.swift in Sources */,
+				1349180D2473167200B3A2C6 /* PhotoCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +330,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Astronomy/Application/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -307,6 +339,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wyattharrell.Astronomy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Astronomy/Application/Astronomy-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -315,6 +350,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Astronomy/Application/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -323,6 +359,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wyattharrell.Astronomy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Astronomy/Application/Astronomy-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
