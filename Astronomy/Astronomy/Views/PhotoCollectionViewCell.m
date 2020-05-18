@@ -10,4 +10,10 @@
 
 @implementation PhotoCollectionViewCell
 
+-(void)layoutSubviews {
+    [super layoutSubviews];
+
+}
+
+
 @end
