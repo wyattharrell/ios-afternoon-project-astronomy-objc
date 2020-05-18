@@ -11,10 +11,14 @@
 NS_ASSUME_NONNULL_BEGIN
 @class Photo;
 @class UIImage;
+@class WHLManifest;
 @interface WHLPhotoController : NSObject
 
+// MARK:- Properties
 @property (nonatomic, readonly, nonnull) NSMutableArray<Photo *> *photos;
+@property (nonatomic, readonly, nonnull) NSMutableArray<WHLManifest *> *manifests;
 
+// MARK:- Methods
 - (void)fetchSinglePhotoWithURL:(NSURL *)imgSrc
                  completionBlock:(void (^)(NSError * _Nullable error, UIImage * _Nullable image))completionBlock;
 
