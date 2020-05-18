@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)fetchManifest:(void (^)(NSError * _Nullable error))completionBlock;
 
+- (void)fetchSolByManifest:(WHLManifest *)manifest completionBlock:(void (^)(NSError * _Nullable error))completionBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END
