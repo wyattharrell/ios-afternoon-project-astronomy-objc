@@ -44,9 +44,9 @@ class PhotoDetailViewController: UIViewController {
         backgroundView.layer.shadowOpacity = 1
         backgroundView.layer.shadowOffset = .zero
         backgroundView.layer.shadowRadius = 8
-        imageView.layer.cornerRadius = 8
         backgroundView.layer.masksToBounds = false
         backgroundView.backgroundColor = UIColor.white
+        imageView.layer.cornerRadius = 8
         imageView.clipsToBounds = true
     }
     
@@ -69,10 +69,7 @@ class PhotoDetailViewController: UIViewController {
         }
     }
     
-    // MARK: - IBActions
-    @IBAction func saveButtonTapped(_ sender: Any) {
-        guard let image = imageView.image else { return }
-        
+    private func savePhoto(with image: UIImage) {
         PHPhotoLibrary.requestAuthorization { (status) in
             switch status {
             case .authorized:
@@ -83,16 +80,30 @@ class PhotoDetailViewController: UIViewController {
                         NSLog("Error saving photo: \(error)")
                         return
                     }
+                    
+                    if success {
+                        DispatchQueue.main.async {
+                            let alert = UIAlertController(title: "Success!", message: nil, preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    }
                 })
             default:
                 DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Cannot save image", message: "Astronomy does not have access to your Photo Library. Please change this in Settings if you would like to save images.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }
                 break
             }
         }
+    }
+    
+    // MARK: - IBActions
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        guard let image = imageView.image else { return }
+        savePhoto(with: image)
     }
     
 }

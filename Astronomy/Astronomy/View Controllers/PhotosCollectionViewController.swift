@@ -17,13 +17,17 @@ class PhotosCollectionViewController: UICollectionViewController {
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowPhotoDetailSegue" {
+            guard let photoDetailVC = segue.destination as? PhotoDetailViewController else { return }
+            guard let selected = collectionView.indexPathsForSelectedItems else { return }
+            // photoDetailVC.photo = controller.photos[selected[0].row]
+        }
     }
 
     // MARK: UICollectionViewDataSource
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 0
