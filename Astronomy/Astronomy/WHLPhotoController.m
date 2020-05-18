@@ -102,7 +102,7 @@ NSString *apiKey = @"3MYY5NPWds1kZu7B3B7In88FKEHYXncJQkgBFNr6";
             }
         }
 
-
+        completionBlock(nil);
 
     }];
 
