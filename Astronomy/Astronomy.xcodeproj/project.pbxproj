@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		130BEEED24746E0300134D5D /* WHLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 130BEEEC24746E0300134D5D /* WHLCache.m */; };
 		134917ED2473152100B3A2C6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 134917EC2473152100B3A2C6 /* AppDelegate.m */; };
 		134917F02473152100B3A2C6 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 134917EF2473152100B3A2C6 /* SceneDelegate.m */; };
 		134917F62473152100B3A2C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 134917F42473152100B3A2C6 /* Main.storyboard */; };
@@ -23,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		130BEEEB24746E0300134D5D /* WHLCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WHLCache.h; sourceTree = "<group>"; };
+		130BEEEC24746E0300134D5D /* WHLCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WHLCache.m; sourceTree = "<group>"; };
 		134917E82473152100B3A2C6 /* Astronomy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Astronomy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		134917EB2473152100B3A2C6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		134917EC2473152100B3A2C6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -135,6 +138,8 @@
 			children = (
 				1349181224731BF600B3A2C6 /* LSIErrors.h */,
 				1349181324731BF600B3A2C6 /* LSIErrors.m */,
+				130BEEEB24746E0300134D5D /* WHLCache.h */,
+				130BEEEC24746E0300134D5D /* WHLCache.m */,
 			);
 			path = "Helper Files";
 			sourceTree = "<group>";
@@ -237,6 +242,7 @@
 				9CB52008247336D700EBC07E /* WHLManifest.m in Sources */,
 				1349181424731BF600B3A2C6 /* LSIErrors.m in Sources */,
 				134917F02473152100B3A2C6 /* SceneDelegate.m in Sources */,
+				130BEEED24746E0300134D5D /* WHLCache.m in Sources */,
 				1349180B247315FD00B3A2C6 /* PhotoDetailViewController.swift in Sources */,
 				9CB520052473266700EBC07E /* WHLPhotoController.m in Sources */,
 			);
