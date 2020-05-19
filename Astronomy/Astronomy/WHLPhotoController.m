@@ -60,6 +60,7 @@ NSString *apiKey = @"3MYY5NPWds1kZu7B3B7In88FKEHYXncJQkgBFNr6";
 }
 
 - (void)fetchManifest:(void (^)(NSError * _Nullable))completionBlock {
+    [self.manifests removeAllObjects];
 
     NSURL *baseURL = [[NSURL URLWithString:baseURLString] URLByAppendingPathComponent:@"manifests/curiosity"];
 
