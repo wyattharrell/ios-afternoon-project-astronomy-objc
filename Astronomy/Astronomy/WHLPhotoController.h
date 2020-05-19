@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
 @class Photo;
 @class UIImage;
 @class WHLManifest;
@@ -16,16 +15,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 // MARK:- Properties
 @property (nonatomic, readonly, nonnull) NSMutableArray<Photo *> *photos;
+// MARK:- QUESTION FOR JON: Why does this --v-- still require us to cast the elements of the array.
 @property (nonatomic, readonly, nonnull) NSMutableArray<WHLManifest *> *manifests;
 
 // MARK:- Methods
-- (void)fetchSinglePhotoWithURL:(NSURL *)imgSrc
-                 completionBlock:(void (^)(NSError * _Nullable error, UIImage * _Nullable image))completionBlock;
+- (void)fetchSinglePhotoWithURL:(NSURL *_Nonnull)imgSrc
+                completionBlock:(void (^_Nonnull)(NSError * _Nullable error, UIImage * _Nullable image))completionBlock;
 
-- (void)fetchManifest:(void (^)(NSError * _Nullable error))completionBlock;
+- (void)fetchManifest:(void (^_Nonnull)(NSError * _Nullable error))completionBlock;
 
-- (void)fetchSolByManifest:(WHLManifest *)manifest completionBlock:(void (^)(NSError * _Nullable error))completionBlock;
+- (void)fetchSolByManifest:(WHLManifest *_Nonnull)manifest completionBlock:(void (^_Nonnull)(NSError * _Nullable error))completionBlock;
 
 @end
-
-NS_ASSUME_NONNULL_END
