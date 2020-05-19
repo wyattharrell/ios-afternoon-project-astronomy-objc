@@ -18,6 +18,7 @@
 		1349181124731B3F00B3A2C6 /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1349181024731B3F00B3A2C6 /* PhotoCollectionViewCell.m */; };
 		1349181424731BF600B3A2C6 /* LSIErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 1349181324731BF600B3A2C6 /* LSIErrors.m */; };
 		138C13DB247340F100915121 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138C13DA247340F100915121 /* PhotosViewController.swift */; };
+		9C0388E524747076001CC65E /* FetchPhotoOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C0388E424747076001CC65E /* FetchPhotoOperation.m */; };
 		9CB52002247321E400EBC07E /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB52001247321E400EBC07E /* Photo.swift */; };
 		9CB520052473266700EBC07E /* WHLPhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB520042473266700EBC07E /* WHLPhotoController.m */; };
 		9CB52008247336D700EBC07E /* WHLManifest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB52007247336D700EBC07E /* WHLManifest.m */; };
@@ -43,6 +44,8 @@
 		1349181224731BF600B3A2C6 /* LSIErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSIErrors.h; sourceTree = "<group>"; };
 		1349181324731BF600B3A2C6 /* LSIErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSIErrors.m; sourceTree = "<group>"; };
 		138C13DA247340F100915121 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		9C0388E324747076001CC65E /* FetchPhotoOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FetchPhotoOperation.h; sourceTree = "<group>"; };
+		9C0388E424747076001CC65E /* FetchPhotoOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FetchPhotoOperation.m; sourceTree = "<group>"; };
 		9CB52001247321E400EBC07E /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Photo.swift; path = Astronomy/Photo.swift; sourceTree = SOURCE_ROOT; };
 		9CB520032473266700EBC07E /* WHLPhotoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WHLPhotoController.h; path = Astronomy/WHLPhotoController.h; sourceTree = SOURCE_ROOT; };
 		9CB520042473266700EBC07E /* WHLPhotoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WHLPhotoController.m; path = Astronomy/WHLPhotoController.m; sourceTree = SOURCE_ROOT; };
@@ -140,6 +143,8 @@
 				1349181324731BF600B3A2C6 /* LSIErrors.m */,
 				130BEEEB24746E0300134D5D /* WHLCache.h */,
 				130BEEEC24746E0300134D5D /* WHLCache.m */,
+				9C0388E324747076001CC65E /* FetchPhotoOperation.h */,
+				9C0388E424747076001CC65E /* FetchPhotoOperation.m */,
 			);
 			path = "Helper Files";
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 				1349181424731BF600B3A2C6 /* LSIErrors.m in Sources */,
 				134917F02473152100B3A2C6 /* SceneDelegate.m in Sources */,
 				130BEEED24746E0300134D5D /* WHLCache.m in Sources */,
+				9C0388E524747076001CC65E /* FetchPhotoOperation.m in Sources */,
 				1349180B247315FD00B3A2C6 /* PhotoDetailViewController.swift in Sources */,
 				9CB520052473266700EBC07E /* WHLPhotoController.m in Sources */,
 			);

@@ -16,8 +16,9 @@ import Foundation
     @objc let imgSrc: URL
     @objc let roverID: Int
     @objc let roverName: String
+    @objc let photoID: Int
 
-    @objc init(sol: Int, cameraName: String, cameraFullName: String, photoDate: Date, imgSrc: URL, roverID: Int, roverName: String) {
+    @objc init(sol: Int, cameraName: String, cameraFullName: String, photoDate: Date, imgSrc: URL, roverID: Int, roverName: String, photoID: Int) {
         self.sol = sol
         self.cameraName = cameraName
         self.cameraFullName = cameraFullName
@@ -25,5 +26,6 @@ import Foundation
         self.imgSrc = imgSrc
         self.roverID = roverID
         self.roverName = roverName
+        self.photoID = photoID
     }
 }
