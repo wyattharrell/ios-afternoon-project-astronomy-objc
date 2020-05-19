@@ -15,7 +15,12 @@
 		134917FE2473152200B3A2C6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 134917FD2473152200B3A2C6 /* main.m */; };
 		13491808247315DB00B3A2C6 /* PhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13491807247315DB00B3A2C6 /* PhotosCollectionViewController.swift */; };
 		1349180B247315FD00B3A2C6 /* PhotoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1349180A247315FD00B3A2C6 /* PhotoDetailViewController.swift */; };
-		1349180D2473167200B3A2C6 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1349180C2473167200B3A2C6 /* PhotoCollectionViewCell.swift */; };
+		1349181124731B3F00B3A2C6 /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1349181024731B3F00B3A2C6 /* PhotoCollectionViewCell.m */; };
+		1349181424731BF600B3A2C6 /* LSIErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 1349181324731BF600B3A2C6 /* LSIErrors.m */; };
+		138C13DB247340F100915121 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138C13DA247340F100915121 /* PhotosViewController.swift */; };
+		9CB52002247321E400EBC07E /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB52001247321E400EBC07E /* Photo.swift */; };
+		9CB520052473266700EBC07E /* WHLPhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB520042473266700EBC07E /* WHLPhotoController.m */; };
+		9CB52008247336D700EBC07E /* WHLManifest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB52007247336D700EBC07E /* WHLManifest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +37,16 @@
 		13491806247315DB00B3A2C6 /* Astronomy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Astronomy-Bridging-Header.h"; sourceTree = "<group>"; };
 		13491807247315DB00B3A2C6 /* PhotosCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewController.swift; sourceTree = "<group>"; };
 		1349180A247315FD00B3A2C6 /* PhotoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewController.swift; sourceTree = "<group>"; };
-		1349180C2473167200B3A2C6 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		1349180F24731B3F00B3A2C6 /* PhotoCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		1349181024731B3F00B3A2C6 /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		1349181224731BF600B3A2C6 /* LSIErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSIErrors.h; sourceTree = "<group>"; };
+		1349181324731BF600B3A2C6 /* LSIErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSIErrors.m; sourceTree = "<group>"; };
+		138C13DA247340F100915121 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		9CB52001247321E400EBC07E /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Photo.swift; path = Astronomy/Photo.swift; sourceTree = SOURCE_ROOT; };
+		9CB520032473266700EBC07E /* WHLPhotoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WHLPhotoController.h; path = Astronomy/WHLPhotoController.h; sourceTree = SOURCE_ROOT; };
+		9CB520042473266700EBC07E /* WHLPhotoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WHLPhotoController.m; path = Astronomy/WHLPhotoController.m; sourceTree = SOURCE_ROOT; };
+		9CB52006247336D700EBC07E /* WHLManifest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WHLManifest.h; path = Astronomy/WHLManifest.h; sourceTree = SOURCE_ROOT; };
+		9CB52007247336D700EBC07E /* WHLManifest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WHLManifest.m; path = Astronomy/WHLManifest.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +79,9 @@
 		134917EA2473152100B3A2C6 /* Astronomy */ = {
 			isa = PBXGroup;
 			children = (
+				1349181724731E7600B3A2C6 /* Model Controllers */,
+				1349181624731E6D00B3A2C6 /* Models */,
+				1349181524731BFA00B3A2C6 /* Helper Files */,
 				134918042473154F00B3A2C6 /* Application */,
 				134918052473156B00B3A2C6 /* Storyboards */,
 				13491809247315DF00B3A2C6 /* View Controllers */,
@@ -100,6 +117,7 @@
 		13491809247315DF00B3A2C6 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				138C13DA247340F100915121 /* PhotosViewController.swift */,
 				13491807247315DB00B3A2C6 /* PhotosCollectionViewController.swift */,
 				1349180A247315FD00B3A2C6 /* PhotoDetailViewController.swift */,
 			);
@@ -109,9 +127,38 @@
 		1349180E2473167600B3A2C6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1349180C2473167200B3A2C6 /* PhotoCollectionViewCell.swift */,
+				1349180F24731B3F00B3A2C6 /* PhotoCollectionViewCell.h */,
+				1349181024731B3F00B3A2C6 /* PhotoCollectionViewCell.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		1349181524731BFA00B3A2C6 /* Helper Files */ = {
+			isa = PBXGroup;
+			children = (
+				1349181224731BF600B3A2C6 /* LSIErrors.h */,
+				1349181324731BF600B3A2C6 /* LSIErrors.m */,
+			);
+			path = "Helper Files";
+			sourceTree = "<group>";
+		};
+		1349181624731E6D00B3A2C6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9CB52001247321E400EBC07E /* Photo.swift */,
+				9CB52006247336D700EBC07E /* WHLManifest.h */,
+				9CB52007247336D700EBC07E /* WHLManifest.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1349181724731E7600B3A2C6 /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9CB520032473266700EBC07E /* WHLPhotoController.h */,
+				9CB520042473266700EBC07E /* WHLPhotoController.m */,
+			);
+			path = "Model Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,12 +232,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CB52002247321E400EBC07E /* Photo.swift in Sources */,
+				138C13DB247340F100915121 /* PhotosViewController.swift in Sources */,
+				1349181124731B3F00B3A2C6 /* PhotoCollectionViewCell.m in Sources */,
 				134917ED2473152100B3A2C6 /* AppDelegate.m in Sources */,
 				134917FE2473152200B3A2C6 /* main.m in Sources */,
+				9CB52008247336D700EBC07E /* WHLManifest.m in Sources */,
+				1349181424731BF600B3A2C6 /* LSIErrors.m in Sources */,
 				134917F02473152100B3A2C6 /* SceneDelegate.m in Sources */,
 				1349180B247315FD00B3A2C6 /* PhotoDetailViewController.swift in Sources */,
+				9CB520052473266700EBC07E /* WHLPhotoController.m in Sources */,
 				13491808247315DB00B3A2C6 /* PhotosCollectionViewController.swift in Sources */,
-				1349180D2473167200B3A2C6 /* PhotoCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
