@@ -22,24 +22,34 @@ class PhotosViewController: UIViewController {
     var hasFinished: Bool = false
     var hasPhotoFinished: Bool = false
     var arrayOfFilters: [Photo] = []
-    var sol: Int = 0
+    var sol: Int = 2
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         previousSolButton.isEnabled = false
-        
-        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            let cols: CGFloat = 2
-            let spacing: CGFloat = 2
-            let edge = (collectionView.bounds.width - spacing * (cols - 1)) / cols
-            flowLayout.itemSize.width = edge
-            flowLayout.itemSize.height = edge
-            flowLayout.minimumInteritemSpacing = spacing
-            flowLayout.minimumLineSpacing = spacing
-            flowLayout.sectionInset = .zero
+        setupCollectionViewCells()
+        networkRequest()
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowPhotoDetailSegue" {
+            guard let photoDetailVC = segue.destination as? PhotoDetailViewController else { return }
+            guard let selected = collectionView.indexPathsForSelectedItems else { return }
+            
+            if arrayOfFilters.count != 0 {
+                photoDetailVC.photo = arrayOfFilters[selected[0].row]
+            } else {
+                photoDetailVC.photo = (photoController.photos[selected[0].row] as! Photo)
+            }
+            
+            photoDetailVC.photoController = photoController
         }
-        
+    }
+    
+    // MARK: - Private Methods
+    private func networkRequest() {
         photoController.fetchManifest { (error) in
             if let error = error {
                 NSLog("Error fetching manifest \(error)")
@@ -64,28 +74,10 @@ class PhotosViewController: UIViewController {
                     self.collectionView.reloadData()
                     self.hasPhotoFinished = true
                 }
-                
             }
         }
     }
     
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowPhotoDetailSegue" {
-            guard let photoDetailVC = segue.destination as? PhotoDetailViewController else { return }
-            guard let selected = collectionView.indexPathsForSelectedItems else { return }
-            
-            if arrayOfFilters.count != 0 {
-                photoDetailVC.photo = arrayOfFilters[selected[0].row]
-            } else {
-                photoDetailVC.photo = (photoController.photos[selected[0].row] as! Photo)
-            }
-            
-            photoDetailVC.photoController = photoController
-        }
-    }
-    
-    // MARK: - Private Methods
     private func setupSegmentedControl() {
         cameraSegmentedControl.removeAllSegments()
         
@@ -94,6 +86,19 @@ class PhotosViewController: UIViewController {
         for item in (photoController.manifests[sol] as! WHLManifest).cameras {
             cameraSegmentedControl.insertSegment(withTitle: item, at: i, animated: true)
             i += 1
+        }
+    }
+    
+    private func setupCollectionViewCells() {
+        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            let cols: CGFloat = 2
+            let spacing: CGFloat = 2
+            let edge = (collectionView.bounds.width - spacing * (cols - 1)) / cols
+            flowLayout.itemSize.width = edge
+            flowLayout.itemSize.height = edge
+            flowLayout.minimumInteritemSpacing = spacing
+            flowLayout.minimumLineSpacing = spacing
+            flowLayout.sectionInset = .zero
         }
     }
     
@@ -185,30 +190,33 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as? PhotoCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.imageView.image = UIImage(named: "placeholder_image")
-        cell.imageBackgroundView.layer.cornerRadius = 8
-        cell.imageBackgroundView.layer.shadowColor = UIColor.lightGray.cgColor
-        cell.imageBackgroundView.layer.shadowOpacity = 1
-        cell.imageBackgroundView.layer.shadowOffset = .zero
-        cell.imageBackgroundView.layer.shadowRadius = 3
-        cell.imageBackgroundView.layer.masksToBounds = false
-        cell.imageBackgroundView.backgroundColor = UIColor.white
-        cell.imageView.layer.cornerRadius = 8
-        cell.imageView.clipsToBounds = true
         if arrayOfFilters.count != 0 {
-            
             cell.textLabel.text = "\(arrayOfFilters[indexPath.row].photoID)"
-            
-            cell.photo = arrayOfFilters[indexPath.row]
-            cell.photoController = photoController
-            
+            loadImage(forCell: cell, forPhoto: arrayOfFilters[indexPath.row])
         } else if hasPhotoFinished {
             cell.textLabel.text = "\((photoController.photos[indexPath.row] as! Photo).photoID)"
-            
-            cell.photo = (photoController.photos[indexPath.row] as! Photo)
-            cell.photoController = photoController
+            loadImage(forCell: cell, forPhoto: (photoController.photos[indexPath.row] as! Photo))
         }
                 
         return cell
+    }
+    
+    private func loadImage(forCell cell: PhotoCollectionViewCell, forPhoto photo: Photo) {
+        photoController.fetchSinglePhoto(with: photo.imgSrc) { (error, image) in
+            if let error = error {
+                NSLog("Error fetching photo \(error)");
+                return
+            }
+            
+            if let image = image {
+                DispatchQueue.main.async {
+                    cell.imageView.image = image
+                }
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
     }
 }
