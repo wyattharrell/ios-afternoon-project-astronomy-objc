@@ -41,12 +41,9 @@
     self.executing = YES;
     // Let observers know we changed this
     [self didChangeValueForKey:@"isExecuting"];
-
-
 }
 
 - (void)main {
-
     self.task = [NSURLSession.sharedSession dataTaskWithURL:self.photoReference.imgSrc completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSLog(@"Inside of FetchPhotoOperation with url: %@", self.photoReference.imgSrc);
         if (error) {
