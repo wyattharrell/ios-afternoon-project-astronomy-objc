@@ -18,6 +18,7 @@ class PhotosViewController: UIViewController {
     
     // MARK: - Properties
     let photoController = WHLPhotoController()
+    let cache = NSCache<NSNumber, Photo>()
     var hasFinished: Bool = false
     var hasPhotoFinished: Bool = false
     var arrayOfFilters: [Photo] = []
@@ -27,6 +28,17 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         previousSolButton.isEnabled = false
+        
+        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            let cols: CGFloat = 2
+            let spacing: CGFloat = 2
+            let edge = (collectionView.bounds.width - spacing * (cols - 1)) / cols
+            flowLayout.itemSize.width = edge
+            flowLayout.itemSize.height = edge
+            flowLayout.minimumInteritemSpacing = spacing
+            flowLayout.minimumLineSpacing = spacing
+            flowLayout.sectionInset = .zero
+        }
         
         photoController.fetchManifest { (error) in
             if let error = error {
@@ -185,13 +197,13 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
         cell.imageView.clipsToBounds = true
         if arrayOfFilters.count != 0 {
             
-            cell.textLabel.text = arrayOfFilters[indexPath.row].cameraName
+            cell.textLabel.text = "\(arrayOfFilters[indexPath.row].photoID)"
             
             cell.photo = arrayOfFilters[indexPath.row]
             cell.photoController = photoController
             
         } else if hasPhotoFinished {
-            cell.textLabel.text = (photoController.photos[indexPath.row] as! Photo).cameraName
+            cell.textLabel.text = "\((photoController.photos[indexPath.row] as! Photo).photoID)"
             
             cell.photo = (photoController.photos[indexPath.row] as! Photo)
             cell.photoController = photoController

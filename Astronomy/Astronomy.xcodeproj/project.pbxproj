@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		130BEEED24746E0300134D5D /* WHLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 130BEEEC24746E0300134D5D /* WHLCache.m */; };
+		130BEEF22474774F00134D5D /* Photos.json in Resources */ = {isa = PBXBuildFile; fileRef = 130BEEF12474774E00134D5D /* Photos.json */; };
 		134917ED2473152100B3A2C6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 134917EC2473152100B3A2C6 /* AppDelegate.m */; };
 		134917F02473152100B3A2C6 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 134917EF2473152100B3A2C6 /* SceneDelegate.m */; };
 		134917F62473152100B3A2C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 134917F42473152100B3A2C6 /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		130BEEEB24746E0300134D5D /* WHLCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WHLCache.h; sourceTree = "<group>"; };
 		130BEEEC24746E0300134D5D /* WHLCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WHLCache.m; sourceTree = "<group>"; };
+		130BEEF12474774E00134D5D /* Photos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Photos.json; sourceTree = "<group>"; };
 		134917E82473152100B3A2C6 /* Astronomy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Astronomy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		134917EB2473152100B3A2C6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		134917EC2473152100B3A2C6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -64,6 +66,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		130BEEF32474775100134D5D /* Mock Data */ = {
+			isa = PBXGroup;
+			children = (
+				130BEEF12474774E00134D5D /* Photos.json */,
+			);
+			path = "Mock Data";
+			sourceTree = "<group>";
+		};
 		134917DF2473152100B3A2C6 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +93,7 @@
 		134917EA2473152100B3A2C6 /* Astronomy */ = {
 			isa = PBXGroup;
 			children = (
+				130BEEF32474775100134D5D /* Mock Data */,
 				1349181724731E7600B3A2C6 /* Model Controllers */,
 				1349181624731E6D00B3A2C6 /* Models */,
 				1349181524731BFA00B3A2C6 /* Helper Files */,
@@ -226,6 +237,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				130BEEF22474774F00134D5D /* Photos.json in Resources */,
 				134917FB2473152200B3A2C6 /* LaunchScreen.storyboard in Resources */,
 				134917F82473152200B3A2C6 /* Assets.xcassets in Resources */,
 				134917F62473152100B3A2C6 /* Main.storyboard in Resources */,
