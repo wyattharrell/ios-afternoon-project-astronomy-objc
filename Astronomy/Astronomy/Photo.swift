@@ -28,4 +28,14 @@ import Foundation
         self.roverName = roverName
         self.photoID = photoID
     }
+
+//    @objc convenience init(jsonData: Data) {
+//
+//        let decoder = JSONDecoder()
+//
+////        var container = decoder.decode(, from: <#T##Data#>)
+//
+//
+//        self.init(sol: 1, cameraName: "H", cameraFullName: "E", photoDate: Date(), imgSrc: URL(string: ".com")!, roverID: 5, roverName: "L", photoID: 56)
+//    }
 }

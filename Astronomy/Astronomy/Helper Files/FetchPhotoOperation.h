@@ -10,11 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FetchPhotoOperation : NSOperation {
-    BOOL executing;
-    BOOL finished;
-}
+@class Photo;
+@interface FetchPhotoOperation : NSOperation
 
+@property (nonatomic) Photo *photoReference;
+@property (nonatomic) NSData *imageData;
+@property (nonatomic) NSURLSessionDataTask *task;
+
+- (instancetype) initWithReference:(Photo *)photo;
 @end
 
 NS_ASSUME_NONNULL_END

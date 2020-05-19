@@ -198,7 +198,6 @@ NSString *apiKey = @"3MYY5NPWds1kZu7B3B7In88FKEHYXncJQkgBFNr6";
             if([photoID isKindOfClass:[NSNull class]]) { photoID = nil; }
 
             if (sol && cameraName && cameraFullName && photoDate && imgSrc && roverID && roverName && photoID) {
-//                Photo *newPhoto = [[Photo alloc] initWithSol:sol.intValue cameraName:cameraName cameraFullName:cameraFullName photoDate:photoDate imgSrc:imgSrc roverID:roverID.intValue roverName:roverName];
                 Photo *newPhoto = [[Photo alloc] initWithSol:sol.intValue cameraName:cameraName cameraFullName:cameraFullName photoDate:photoDate imgSrc:imgSrc roverID:roverID.intValue roverName:roverName photoID:photoID.intValue];
                 [self.photos addObject:newPhoto];
             }
