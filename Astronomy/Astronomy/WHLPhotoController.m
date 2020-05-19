@@ -179,6 +179,11 @@ NSString *apiKey = @"3MYY5NPWds1kZu7B3B7In88FKEHYXncJQkgBFNr6";
 
             NSURL *imgSrc = [NSURL URLWithString:photoDict[@"img_src"]];
             if([imgSrc isKindOfClass:[NSNull class]]) { imgSrc = nil; }
+            if (imgSrc) {
+                NSURLComponents *components = [NSURLComponents componentsWithURL:imgSrc resolvingAgainstBaseURL:YES];
+                components.scheme = @"https";
+                imgSrc = components.URL;
+            }
 
             NSDictionary *rover = photoDict[@"rover"];
             NSNumber *roverID = rover[@"id"];
