@@ -61,8 +61,14 @@ class PhotosViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowPhotoDetailSegue" {
             guard let photoDetailVC = segue.destination as? PhotoDetailViewController else { return }
-             guard let selected = collectionView.indexPathsForSelectedItems else { return }
-            photoDetailVC.photo = (photoController.photos[selected[0].row] as! Photo)
+            guard let selected = collectionView.indexPathsForSelectedItems else { return }
+            
+            if arrayOfFilters.count != 0 {
+                photoDetailVC.photo = arrayOfFilters[selected[0].row]
+            } else {
+                photoDetailVC.photo = (photoController.photos[selected[0].row] as! Photo)
+            }
+            
             photoDetailVC.photoController = photoController
         }
     }
@@ -82,11 +88,25 @@ class PhotosViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func previousSolButtonTapped(_ sender: Any) {
         if hasFinished {
-            if sol != 0 {
-                sol -= 1
+            
+            hasPhotoFinished = false
+            
+            if self.sol != 0 {
+                self.sol -= 1
+                self.setupSegmentedControl()
                 self.title = "Sol \(Int((self.photoController.manifests[self.sol] as! WHLManifest).solID))"
-                collectionView.reloadData()
-                setupSegmentedControl()
+            }
+            
+            photoController.fetchSol(by: self.photoController.manifests[self.sol] as! WHLManifest) { (error) in
+                if let error = error {
+                    NSLog("Error fetching manifest \(error)")
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                    self.hasPhotoFinished = true
+                }
             }
         }
         if sol == 0 {
@@ -96,11 +116,25 @@ class PhotosViewController: UIViewController {
     
     @IBAction func nextSolButtonTapped(_ sender: Any) {
         if hasFinished, sol < Int((self.photoController.manifests.count - 1)) {
-            sol += 1
-            collectionView.reloadData()
+            
+            self.sol += 1
+            hasPhotoFinished = false
             self.title = "Sol \(Int((self.photoController.manifests[self.sol] as! WHLManifest).solID))"
-            previousSolButton.isEnabled = true
-            setupSegmentedControl()
+            self.previousSolButton.isEnabled = true
+            self.setupSegmentedControl()
+
+            photoController.fetchSol(by: self.photoController.manifests[self.sol] as! WHLManifest) { (error) in
+                if let error = error {
+                    NSLog("Error fetching manifest \(error)")
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    self.hasPhotoFinished = true
+                    self.collectionView.reloadData()
+                }
+                
+            }
         }
     }
     
