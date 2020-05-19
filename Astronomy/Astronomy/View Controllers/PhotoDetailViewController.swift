@@ -52,6 +52,24 @@ class PhotoDetailViewController: UIViewController {
     
     private func updateViews() {
         guard isViewLoaded else { return }
+        guard let photo = photo else { return }
+        
+        photoController?.fetchSinglePhoto(with: photo.imgSrc, completionBlock: { (error, image) in
+            if let error = error {
+                NSLog("Error fetching image \(error)")
+            }
+            
+            if let image = image {
+                DispatchQueue.main.async {
+                    self.imageView.image = image
+                }
+            }
+        })
+        
+        cameraLabel.text = photo.cameraName
+        roverLabel.text = "\(photo.roverID)"
+        dateLabel.text = "\(photo.photoDate)"
+        solLabel.text = "\(photo.sol)"
     }
     
     private func testFetch() {

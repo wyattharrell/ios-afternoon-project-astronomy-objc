@@ -26,12 +26,7 @@ class PhotosCollectionViewController: UICollectionViewController {
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowPhotoDetailSegue" {
-            guard let photoDetailVC = segue.destination as? PhotoDetailViewController else { return }
-            guard let selected = collectionView.indexPathsForSelectedItems else { return }
-            // photoDetailVC.photo = controller.photos[selected[0].row]
-            photoDetailVC.photoController = photoController
-        }
+ 
     }
 
     // MARK: UICollectionViewDataSource

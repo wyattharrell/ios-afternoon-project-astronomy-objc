@@ -180,11 +180,20 @@
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CgT-lr-sWD">
                                                             <rect key="frame" x="0.0" y="0.0" width="169" height="169"/>
                                                         </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OhL-Hn-LQL">
+                                                            <rect key="frame" x="0.0" y="140" width="169" height="21"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
                                                         <constraint firstItem="CgT-lr-sWD" firstAttribute="leading" secondItem="tp3-tt-5ng" secondAttribute="leading" id="1Vv-SQ-qk0"/>
                                                         <constraint firstItem="CgT-lr-sWD" firstAttribute="top" secondItem="tp3-tt-5ng" secondAttribute="top" id="2YI-ZT-ZuF"/>
+                                                        <constraint firstAttribute="trailing" secondItem="OhL-Hn-LQL" secondAttribute="trailing" id="8Za-YX-TXP"/>
+                                                        <constraint firstAttribute="bottom" secondItem="OhL-Hn-LQL" secondAttribute="bottom" constant="8" id="BHD-Dz-sJ2"/>
+                                                        <constraint firstItem="OhL-Hn-LQL" firstAttribute="leading" secondItem="tp3-tt-5ng" secondAttribute="leading" id="G6O-04-mL5"/>
                                                         <constraint firstAttribute="bottom" secondItem="CgT-lr-sWD" secondAttribute="bottom" id="X4p-iq-2yf"/>
                                                         <constraint firstAttribute="trailing" secondItem="CgT-lr-sWD" secondAttribute="trailing" id="pso-Hu-V56"/>
                                                     </constraints>
@@ -200,6 +209,7 @@
                                         <connections>
                                             <outlet property="imageBackgroundView" destination="tp3-tt-5ng" id="EWK-YN-aN2"/>
                                             <outlet property="imageView" destination="CgT-lr-sWD" id="bJc-fm-joQ"/>
+                                            <outlet property="textLabel" destination="OhL-Hn-LQL" id="bUl-Go-Sc3"/>
                                             <segue destination="C4k-M2-WCG" kind="show" identifier="ShowPhotoDetailSegue" id="E6r-Q8-UUe"/>
                                         </connections>
                                     </collectionViewCell>
