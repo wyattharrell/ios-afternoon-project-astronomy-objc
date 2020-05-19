@@ -27,6 +27,7 @@ class PhotosViewController: UIViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        cameraSegmentedControl.isEnabled = false
         previousSolButton.isEnabled = false
         setupCollectionViewCells()
         networkRequest()
@@ -73,6 +74,7 @@ class PhotosViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                     self.hasPhotoFinished = true
+                    self.cameraSegmentedControl.isEnabled = true
                 }
             }
         }
@@ -87,6 +89,7 @@ class PhotosViewController: UIViewController {
             cameraSegmentedControl.insertSegment(withTitle: item, at: i, animated: true)
             i += 1
         }
+        cameraSegmentedControl.selectedSegmentIndex = 0
     }
     
     private func setupCollectionViewCells() {
@@ -107,6 +110,7 @@ class PhotosViewController: UIViewController {
         if hasFinished {
             
             hasPhotoFinished = false
+            cameraSegmentedControl.isEnabled = false
             
             if self.sol != 0 {
                 self.sol -= 1
@@ -123,6 +127,7 @@ class PhotosViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                     self.hasPhotoFinished = true
+                    self.cameraSegmentedControl.isEnabled = true
                 }
             }
         }
@@ -136,6 +141,7 @@ class PhotosViewController: UIViewController {
             
             self.sol += 1
             hasPhotoFinished = false
+            cameraSegmentedControl.isEnabled = false
             self.title = "Sol \(Int((self.photoController.manifests[self.sol] as! WHLManifest).solID))"
             self.previousSolButton.isEnabled = true
             self.setupSegmentedControl()
@@ -149,6 +155,7 @@ class PhotosViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.hasPhotoFinished = true
                     self.collectionView.reloadData()
+                    self.cameraSegmentedControl.isEnabled = true
                 }
                 
             }
