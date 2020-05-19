@@ -41,9 +41,6 @@
     self.executing = YES;
     // Let observers know we changed this
     [self didChangeValueForKey:@"isExecuting"];
-}
-
-- (void)main {
     self.task = [NSURLSession.sharedSession dataTaskWithURL:self.photoReference.imgSrc completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSLog(@"Inside of FetchPhotoOperation with url: %@", self.photoReference.imgSrc);
         if (error) {
@@ -61,6 +58,26 @@
         [self didChangeValueForKey:@"isFinished"];
     }];
     [self.task resume];
+}
+
+- (void)main {
+//    self.task = [NSURLSession.sharedSession dataTaskWithURL:self.photoReference.imgSrc completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//        NSLog(@"Inside of FetchPhotoOperation with url: %@", self.photoReference.imgSrc);
+//        if (error) {
+//            NSLog(@"Error fetching image for photo: %@", self.photoReference);
+//            [self willChangeValueForKey:@"isFinished"];
+//            self.finished = YES;
+//            [self didChangeValueForKey:@"isFinished"];
+//            return;
+//        }
+//
+//        self.imageData = data;
+//
+//        [self willChangeValueForKey:@"isFinished"];
+//        self.finished = YES;
+//        [self didChangeValueForKey:@"isFinished"];
+//    }];
+//    [self.task resume];
 }
 
 - (void)cancel {
