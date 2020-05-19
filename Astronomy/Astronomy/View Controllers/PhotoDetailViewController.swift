@@ -33,7 +33,6 @@ class PhotoDetailViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         updateViews()
-        testFetch()
     }
     
     // MARK: - Private Methods
@@ -70,21 +69,6 @@ class PhotoDetailViewController: UIViewController {
         roverLabel.text = "\(photo.roverID)"
         dateLabel.text = "\(photo.photoDate)"
         solLabel.text = "\(photo.sol)"
-    }
-    
-    private func testFetch() {
-        let url = URL(string: "https://mars.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00012/opgs/edr/ccam/CR0_398560983EDR_F0030004CCAM03012M_.JPG")!
-        photoController?.fetchSinglePhoto(with: url) { (error, image) in
-            if let error = error {
-                NSLog("Error fetching photo: \(error)")
-            }
-            
-            if let image = image {
-                DispatchQueue.main.async {
-                    self.imageView.image = image
-                }
-            }
-        }
     }
     
     private func savePhoto(with image: UIImage) {

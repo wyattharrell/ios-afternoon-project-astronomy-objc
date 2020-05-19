@@ -21,13 +21,39 @@ class PhotosViewController: UIViewController {
     var hasFinished: Bool = false
     var hasPhotoFinished: Bool = false
     var arrayOfFilters: [Photo] = []
-    var sol: Int = 0
+    var sol: Int = 2
+    let cache = NSCache<NSNumber, UIImage>()
+    var operationsDict: [Int : Operation] = [:]
+    let photoFetchQueue = OperationQueue()
+
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        cameraSegmentedControl.isEnabled = false
         previousSolButton.isEnabled = false
-        
+        setupCollectionViewCells()
+        networkRequest()
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowPhotoDetailSegue" {
+            guard let photoDetailVC = segue.destination as? PhotoDetailViewController else { return }
+            guard let selected = collectionView.indexPathsForSelectedItems else { return }
+            
+            if arrayOfFilters.count != 0 {
+                photoDetailVC.photo = arrayOfFilters[selected[0].row]
+            } else {
+                photoDetailVC.photo = (photoController.photos[selected[0].row] as! Photo)
+            }
+            
+            photoDetailVC.photoController = photoController
+        }
+    }
+    
+    // MARK: - Private Methods
+    private func networkRequest() {
         photoController.fetchManifest { (error) in
             if let error = error {
                 NSLog("Error fetching manifest \(error)")
@@ -51,29 +77,12 @@ class PhotosViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                     self.hasPhotoFinished = true
+                    self.cameraSegmentedControl.isEnabled = true
                 }
-                
             }
         }
     }
     
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowPhotoDetailSegue" {
-            guard let photoDetailVC = segue.destination as? PhotoDetailViewController else { return }
-            guard let selected = collectionView.indexPathsForSelectedItems else { return }
-            
-            if arrayOfFilters.count != 0 {
-                photoDetailVC.photo = arrayOfFilters[selected[0].row]
-            } else {
-                photoDetailVC.photo = (photoController.photos[selected[0].row] as! Photo)
-            }
-            
-            photoDetailVC.photoController = photoController
-        }
-    }
-    
-    // MARK: - Private Methods
     private func setupSegmentedControl() {
         cameraSegmentedControl.removeAllSegments()
         
@@ -83,6 +92,20 @@ class PhotosViewController: UIViewController {
             cameraSegmentedControl.insertSegment(withTitle: item, at: i, animated: true)
             i += 1
         }
+        cameraSegmentedControl.selectedSegmentIndex = 0
+    }
+    
+    private func setupCollectionViewCells() {
+        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            let cols: CGFloat = 2
+            let spacing: CGFloat = 2
+            let edge = (collectionView.bounds.width - spacing * (cols - 1)) / cols
+            flowLayout.itemSize.width = edge
+            flowLayout.itemSize.height = edge
+            flowLayout.minimumInteritemSpacing = spacing
+            flowLayout.minimumLineSpacing = spacing
+            flowLayout.sectionInset = .zero
+        }
     }
     
     // MARK: - IBActions
@@ -90,6 +113,7 @@ class PhotosViewController: UIViewController {
         if hasFinished {
             
             hasPhotoFinished = false
+            cameraSegmentedControl.isEnabled = false
             
             if self.sol != 0 {
                 self.sol -= 1
@@ -106,6 +130,7 @@ class PhotosViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                     self.hasPhotoFinished = true
+                    self.cameraSegmentedControl.isEnabled = true
                 }
             }
         }
@@ -119,6 +144,7 @@ class PhotosViewController: UIViewController {
             
             self.sol += 1
             hasPhotoFinished = false
+            cameraSegmentedControl.isEnabled = false
             self.title = "Sol \(Int((self.photoController.manifests[self.sol] as! WHLManifest).solID))"
             self.previousSolButton.isEnabled = true
             self.setupSegmentedControl()
@@ -132,6 +158,7 @@ class PhotosViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.hasPhotoFinished = true
                     self.collectionView.reloadData()
+                    self.cameraSegmentedControl.isEnabled = true
                 }
                 
             }
@@ -173,30 +200,52 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as? PhotoCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.imageView.image = UIImage(named: "placeholder_image")
-        cell.imageBackgroundView.layer.cornerRadius = 8
-        cell.imageBackgroundView.layer.shadowColor = UIColor.lightGray.cgColor
-        cell.imageBackgroundView.layer.shadowOpacity = 1
-        cell.imageBackgroundView.layer.shadowOffset = .zero
-        cell.imageBackgroundView.layer.shadowRadius = 3
-        cell.imageBackgroundView.layer.masksToBounds = false
-        cell.imageBackgroundView.backgroundColor = UIColor.white
-        cell.imageView.layer.cornerRadius = 8
-        cell.imageView.clipsToBounds = true
         if arrayOfFilters.count != 0 {
-            
-            cell.textLabel.text = arrayOfFilters[indexPath.row].cameraName
-            
-            cell.photo = arrayOfFilters[indexPath.row]
-            cell.photoController = photoController
-            
+            cell.textLabel.text = "\(arrayOfFilters[indexPath.row].photoID)"
+            loadImage(at: cell, with: indexPath, for: arrayOfFilters[indexPath.row])
         } else if hasPhotoFinished {
-            cell.textLabel.text = (photoController.photos[indexPath.row] as! Photo).cameraName
-            
-            cell.photo = (photoController.photos[indexPath.row] as! Photo)
-            cell.photoController = photoController
+            cell.textLabel.text = "\((photoController.photos[indexPath.row] as! Photo).photoID)"
+            loadImage(at: cell, with: indexPath, for: (photoController.photos[indexPath.row] as! Photo))
         }
                 
         return cell
+    }
+    
+    private func loadImage(at cell: PhotoCollectionViewCell, with indexPath: IndexPath, for photo: Photo) {
+        let photoID = NSNumber(value: photo.photoID)
+        
+        if let cachedVersion = cache.object(forKey: photoID) {
+            cell.imageView.image = cachedVersion
+        } else {
+            let fetchPhotoOperation = FetchPhotoOperation(reference: photo)
+        
+            let cacheImageData = BlockOperation {
+                let image = UIImage(data: fetchPhotoOperation.imageData)
+                if let image = image {
+                    self.cache.setObject(image, forKey: photoID)
+                }
+            }
+            
+            let finalBlock = BlockOperation {
+                if let cachedImage = self.cache.object(forKey: photoID) {
+                    cell.imageView.image = cachedImage
+                }
+            }
+            
+            cacheImageData.addDependency(fetchPhotoOperation)
+            finalBlock.addDependency(cacheImageData)
+            
+            photoFetchQueue.addOperations([cacheImageData, fetchPhotoOperation], waitUntilFinished: false)
+            OperationQueue.main.addOperation(finalBlock)
+            
+            operationsDict[photo.photoID] = fetchPhotoOperation
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let photoId = (self.photoController.photos[indexPath.item] as! Photo).photoID
+        if let op = operationsDict[photoId] {
+            op.cancel()
+        }
     }
 }

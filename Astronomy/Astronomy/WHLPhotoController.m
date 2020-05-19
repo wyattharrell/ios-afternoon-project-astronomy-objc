@@ -194,8 +194,11 @@ NSString *apiKey = @"3MYY5NPWds1kZu7B3B7In88FKEHYXncJQkgBFNr6";
             NSString *roverName = rover[@"name"];
             if([roverName isKindOfClass:[NSNull class]]) { roverName = nil; }
 
-            if (sol && cameraName && cameraFullName && photoDate && imgSrc && roverID && roverName) {
-                Photo *newPhoto = [[Photo alloc] initWithSol:sol.intValue cameraName:cameraName cameraFullName:cameraFullName photoDate:photoDate imgSrc:imgSrc roverID:roverID.intValue roverName:roverName];
+            NSNumber *photoID = photoDict[@"id"];
+            if([photoID isKindOfClass:[NSNull class]]) { photoID = nil; }
+
+            if (sol && cameraName && cameraFullName && photoDate && imgSrc && roverID && roverName && photoID) {
+                Photo *newPhoto = [[Photo alloc] initWithSol:sol.intValue cameraName:cameraName cameraFullName:cameraFullName photoDate:photoDate imgSrc:imgSrc roverID:roverID.intValue roverName:roverName photoID:photoID.intValue];
                 [self.photos addObject:newPhoto];
             }
 #warning program won't alert when the nil checker and will move on to the next object in the array

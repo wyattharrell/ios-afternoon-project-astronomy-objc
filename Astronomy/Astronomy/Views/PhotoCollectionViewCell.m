@@ -14,14 +14,24 @@
 
 -(void)layoutSubviews {
     [super layoutSubviews];
+
+    _imageBackgroundView.layer.cornerRadius = 8;
+    _imageBackgroundView.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+    _imageBackgroundView.layer.shadowOpacity = 1;
+    _imageBackgroundView.layer.shadowOffset = CGSizeMake(0, 0);
+    _imageBackgroundView.layer.shadowRadius = 3;
+    _imageBackgroundView.layer.masksToBounds = NO;
+    _imageBackgroundView.backgroundColor = [UIColor whiteColor];
+    _imageView.layer.cornerRadius = 8;
+    _imageView.clipsToBounds = YES;
+
+}
+
+-(void)prepareForReuse {
+    [super prepareForReuse];
     
-    [self.photoController fetchSinglePhotoWithURL:self.photo.imgSrc completionBlock:^(NSError * _Nullable error, UIImage * _Nullable image) {
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.imageView setImage:image];
-        });
-        
-    }];
+    self.imageView.image = nil;
+    
 }
 
 
