@@ -18,7 +18,7 @@ class PhotosViewController: UIViewController {
     
     // MARK: - Properties
     let photoController = WHLPhotoController()
-    let cache = NSCache<NSNumber, Photo>()
+    let cache = NSCache<NSNumber, UIImage>()
     var hasFinished: Bool = false
     var hasPhotoFinished: Bool = false
     var arrayOfFilters: [Photo] = []
@@ -209,15 +209,23 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     private func loadImage(forCell cell: PhotoCollectionViewCell, forPhoto photo: Photo) {
-        photoController.fetchSinglePhoto(with: photo.imgSrc) { (error, image) in
-            if let error = error {
-                NSLog("Error fetching photo \(error)");
-                return
-            }
-            
-            if let image = image {
-                DispatchQueue.main.async {
-                    cell.imageView.image = image
+        
+        let photoID = NSNumber(value: photo.photoID)
+        
+        if let cachedVersion = cache.object(forKey: photoID) {
+            cell.imageView.image = cachedVersion
+        } else {
+            photoController.fetchSinglePhoto(with: photo.imgSrc) { (error, image) in
+                if let error = error {
+                    NSLog("Error fetching photo \(error)");
+                    return
+                }
+                
+                if let image = image {
+                    DispatchQueue.main.async {
+                        cell.imageView.image = image
+                        self.cache.setObject(image, forKey: photoID)
+                    }
                 }
             }
         }

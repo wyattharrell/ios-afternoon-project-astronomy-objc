@@ -180,8 +180,9 @@
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CgT-lr-sWD">
                                                             <rect key="frame" x="0.0" y="0.0" width="169" height="169"/>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OhL-Hn-LQL">
-                                                            <rect key="frame" x="0.0" y="140" width="169" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OhL-Hn-LQL">
+                                                            <rect key="frame" x="8" y="161" width="153" height="0.0"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -191,9 +192,9 @@
                                                     <constraints>
                                                         <constraint firstItem="CgT-lr-sWD" firstAttribute="leading" secondItem="tp3-tt-5ng" secondAttribute="leading" id="1Vv-SQ-qk0"/>
                                                         <constraint firstItem="CgT-lr-sWD" firstAttribute="top" secondItem="tp3-tt-5ng" secondAttribute="top" id="2YI-ZT-ZuF"/>
-                                                        <constraint firstAttribute="trailing" secondItem="OhL-Hn-LQL" secondAttribute="trailing" id="8Za-YX-TXP"/>
+                                                        <constraint firstAttribute="trailing" secondItem="OhL-Hn-LQL" secondAttribute="trailing" constant="8" id="8Za-YX-TXP"/>
                                                         <constraint firstAttribute="bottom" secondItem="OhL-Hn-LQL" secondAttribute="bottom" constant="8" id="BHD-Dz-sJ2"/>
-                                                        <constraint firstItem="OhL-Hn-LQL" firstAttribute="leading" secondItem="tp3-tt-5ng" secondAttribute="leading" id="G6O-04-mL5"/>
+                                                        <constraint firstItem="OhL-Hn-LQL" firstAttribute="leading" secondItem="tp3-tt-5ng" secondAttribute="leading" constant="8" id="G6O-04-mL5"/>
                                                         <constraint firstAttribute="bottom" secondItem="CgT-lr-sWD" secondAttribute="bottom" id="X4p-iq-2yf"/>
                                                         <constraint firstAttribute="trailing" secondItem="CgT-lr-sWD" secondAttribute="trailing" id="pso-Hu-V56"/>
                                                     </constraints>
@@ -222,8 +223,8 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Wc5-9P-36S">
                                 <rect key="frame" x="0.0" y="88" width="414" height="32"/>
                                 <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
+                                    <segment title=""/>
+                                    <segment title=""/>
                                 </segments>
                                 <connections>
                                     <action selector="cameraSegmentedControlChanged:" destination="rzx-pW-Dpz" eventType="valueChanged" id="Ko4-CE-eid"/>
