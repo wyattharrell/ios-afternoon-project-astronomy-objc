@@ -221,7 +221,7 @@
                                 </connections>
                             </collectionView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Wc5-9P-36S">
-                                <rect key="frame" x="0.0" y="88" width="414" height="32"/>
+                                <rect key="frame" x="-4" y="88" width="422" height="32"/>
                                 <segments>
                                     <segment title=""/>
                                     <segment title=""/>
@@ -233,8 +233,8 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Wc5-9P-36S" firstAttribute="trailing" secondItem="bik-BZ-ihb" secondAttribute="trailing" id="56E-Hs-Cfv"/>
-                            <constraint firstItem="Wc5-9P-36S" firstAttribute="leading" secondItem="bik-BZ-ihb" secondAttribute="leading" id="EkJ-gl-yJf"/>
+                            <constraint firstItem="Wc5-9P-36S" firstAttribute="trailing" secondItem="bik-BZ-ihb" secondAttribute="trailing" constant="4" id="56E-Hs-Cfv"/>
+                            <constraint firstItem="Wc5-9P-36S" firstAttribute="leading" secondItem="bik-BZ-ihb" secondAttribute="leading" constant="-4" id="EkJ-gl-yJf"/>
                             <constraint firstItem="Wc5-9P-36S" firstAttribute="top" secondItem="bik-BZ-ihb" secondAttribute="top" id="Fi6-6k-fc8"/>
                             <constraint firstItem="37H-Da-wvW" firstAttribute="top" secondItem="Wc5-9P-36S" secondAttribute="bottom" id="JNu-B3-I4u"/>
                             <constraint firstItem="bik-BZ-ihb" firstAttribute="trailing" secondItem="37H-Da-wvW" secondAttribute="trailing" id="d2f-fr-fA3"/>
