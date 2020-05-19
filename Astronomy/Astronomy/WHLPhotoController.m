@@ -126,6 +126,7 @@ NSString *apiKey = @"3MYY5NPWds1kZu7B3B7In88FKEHYXncJQkgBFNr6";
 }
 
 - (void)fetchSolByManifest:(WHLManifest *)manifest completionBlock:(void (^)(NSError * _Nullable))completionBlock {
+    [self.photos removeAllObjects];
 
     NSURL *baseURL = [[NSURL URLWithString:baseURLString] URLByAppendingPathComponent:@"rovers/curiosity/photos"];
 
