@@ -60,6 +60,7 @@
         self.finished = YES;
         [self didChangeValueForKey:@"isFinished"];
     }];
+    [self.task resume];
 }
 
 - (void)cancel {
