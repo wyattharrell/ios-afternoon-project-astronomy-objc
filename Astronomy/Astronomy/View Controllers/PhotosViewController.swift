@@ -18,11 +18,14 @@ class PhotosViewController: UIViewController {
     
     // MARK: - Properties
     let photoController = WHLPhotoController()
-    let cache = NSCache<NSNumber, UIImage>()
     var hasFinished: Bool = false
     var hasPhotoFinished: Bool = false
     var arrayOfFilters: [Photo] = []
     var sol: Int = 2
+    let cache = NSCache<NSNumber, UIImage>()
+    var operationsDict: [Int : Operation] = [:]
+    let photoFetchQueue = OperationQueue()
+
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -199,39 +202,50 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
         
         if arrayOfFilters.count != 0 {
             cell.textLabel.text = "\(arrayOfFilters[indexPath.row].photoID)"
-            loadImage(forCell: cell, forPhoto: arrayOfFilters[indexPath.row])
+            loadImage(at: cell, with: indexPath, for: arrayOfFilters[indexPath.row])
         } else if hasPhotoFinished {
             cell.textLabel.text = "\((photoController.photos[indexPath.row] as! Photo).photoID)"
-            loadImage(forCell: cell, forPhoto: (photoController.photos[indexPath.row] as! Photo))
+            loadImage(at: cell, with: indexPath, for: (photoController.photos[indexPath.row] as! Photo))
         }
                 
         return cell
     }
     
-    private func loadImage(forCell cell: PhotoCollectionViewCell, forPhoto photo: Photo) {
-        
+    private func loadImage(at cell: PhotoCollectionViewCell, with indexPath: IndexPath, for photo: Photo) {
         let photoID = NSNumber(value: photo.photoID)
         
         if let cachedVersion = cache.object(forKey: photoID) {
             cell.imageView.image = cachedVersion
         } else {
-            photoController.fetchSinglePhoto(with: photo.imgSrc) { (error, image) in
-                if let error = error {
-                    NSLog("Error fetching photo \(error)");
-                    return
-                }
-                
+            let fetchPhotoOperation = FetchPhotoOperation(reference: photo)
+        
+            let cacheImageData = BlockOperation {
+                let image = UIImage(data: fetchPhotoOperation.imageData)
                 if let image = image {
-                    DispatchQueue.main.async {
-                        cell.imageView.image = image
-                        self.cache.setObject(image, forKey: photoID)
-                    }
+                    self.cache.setObject(image, forKey: photoID)
                 }
             }
+            
+            let finalBlock = BlockOperation {
+                if let cachedImage = self.cache.object(forKey: photoID) {
+                    cell.imageView.image = cachedImage
+                }
+            }
+            
+            cacheImageData.addDependency(fetchPhotoOperation)
+            finalBlock.addDependency(cacheImageData)
+            
+            photoFetchQueue.addOperations([cacheImageData, fetchPhotoOperation], waitUntilFinished: false)
+            OperationQueue.main.addOperation(finalBlock)
+            
+            operationsDict[photo.photoID] = fetchPhotoOperation
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
+        let photoId = (self.photoController.photos[indexPath.item] as! Photo).photoID
+        if let op = operationsDict[photoId] {
+            op.cancel()
+        }
     }
 }
