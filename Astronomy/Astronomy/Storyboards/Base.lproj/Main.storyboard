@@ -249,18 +249,11 @@
                                 <action selector="previousSolButtonTapped:" destination="rzx-pW-Dpz" id="1YF-kI-gSc"/>
                             </connections>
                         </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem title="Item" image="arrow.right.circle.fill" catalog="system" id="7s8-Y5-2QX">
-                                <connections>
-                                    <action selector="nextSolButtonTapped:" destination="rzx-pW-Dpz" id="MiA-y3-gvi"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Testing" id="jMb-0k-Pff">
-                                <connections>
-                                    <segue destination="C4k-M2-WCG" kind="show" id="6AW-80-Jnn"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="arrow.right.circle.fill" catalog="system" id="7s8-Y5-2QX">
+                            <connections>
+                                <action selector="nextSolButtonTapped:" destination="rzx-pW-Dpz" id="MiA-y3-gvi"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="cameraSegmentedControl" destination="Wc5-9P-36S" id="Ir7-Al-GFn"/>
@@ -292,9 +285,6 @@
             <point key="canvasLocation" x="152.17391304347828" y="41.517857142857139"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="E6r-Q8-UUe"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.left.circle.fill" catalog="system" width="128" height="121"/>
         <image name="arrow.right.circle.fill" catalog="system" width="128" height="121"/>
