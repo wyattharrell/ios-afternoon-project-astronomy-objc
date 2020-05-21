@@ -113,6 +113,7 @@ class PhotosViewController: UIViewController {
         if hasFinished {
             
             hasPhotoFinished = false
+            self.arrayOfFilters.removeAll()
             cameraSegmentedControl.isEnabled = false
             
             if self.sol != 0 {
@@ -143,6 +144,7 @@ class PhotosViewController: UIViewController {
         if hasFinished, sol < Int((self.photoController.manifests.count - 1)) {
             
             self.sol += 1
+            self.arrayOfFilters.removeAll()
             hasPhotoFinished = false
             cameraSegmentedControl.isEnabled = false
             self.title = "Sol \(Int((self.photoController.manifests[self.sol] as! WHLManifest).solID))"
@@ -203,7 +205,7 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
         if arrayOfFilters.count != 0 {
             cell.textLabel.text = "\(arrayOfFilters[indexPath.row].photoID)"
             loadImage(at: cell, with: indexPath, for: arrayOfFilters[indexPath.row])
-        } else if hasPhotoFinished {
+        } else if hasPhotoFinished && hasFinished {
             cell.textLabel.text = "\((photoController.photos[indexPath.row] as! Photo).photoID)"
             loadImage(at: cell, with: indexPath, for: (photoController.photos[indexPath.row] as! Photo))
         }
