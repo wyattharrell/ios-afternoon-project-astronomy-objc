@@ -26,6 +26,9 @@ class PhotosViewController: UIViewController {
     var operationsDict: [Int : Operation] = [:]
     let photoFetchQueue = OperationQueue()
 
+    // MARK: - Hector testing
+    var cancelCells:[Photo] = []
+
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -60,7 +63,7 @@ class PhotosViewController: UIViewController {
                 return
             }
             
-            self.hasFinished = true
+//            self.hasFinished = true
             
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
@@ -76,6 +79,7 @@ class PhotosViewController: UIViewController {
                 
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
+                    self.hasFinished = true
                     self.hasPhotoFinished = true
                     self.cameraSegmentedControl.isEnabled = true
                 }
@@ -121,7 +125,10 @@ class PhotosViewController: UIViewController {
                 self.setupSegmentedControl()
                 self.title = "Sol \(Int((self.photoController.manifests[self.sol] as! WHLManifest).solID))"
             }
-            
+
+            // MARK: - Copy the current set of photos into an array so that they may be cancelled from this array.
+            // Could use an array of Ints instead, and map the photo array by IDs
+            cancelCells = photoController.photos as! [Photo]
             photoController.fetchSol(by: self.photoController.manifests[self.sol] as! WHLManifest) { (error) in
                 if let error = error {
                     NSLog("Error fetching manifest \(error)")
@@ -131,6 +138,7 @@ class PhotosViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                     self.hasPhotoFinished = true
+                    self.hasFinished = true
                     self.cameraSegmentedControl.isEnabled = true
                 }
             }
@@ -147,10 +155,14 @@ class PhotosViewController: UIViewController {
             self.arrayOfFilters.removeAll()
             hasPhotoFinished = false
             cameraSegmentedControl.isEnabled = false
+
             self.title = "Sol \(Int((self.photoController.manifests[self.sol] as! WHLManifest).solID))"
             self.previousSolButton.isEnabled = true
             self.setupSegmentedControl()
 
+            // MARK: - Copy the current set of photos into an array so that they may be cancelled from this array.
+            // Could use an array of Ints instead, and map the photo array by IDs
+            cancelCells = photoController.photos as! [Photo]
             photoController.fetchSol(by: self.photoController.manifests[self.sol] as! WHLManifest) { (error) in
                 if let error = error {
                     NSLog("Error fetching manifest \(error)")
@@ -192,7 +204,7 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if arrayOfFilters.count != 0 {
             return arrayOfFilters.count
-        } else if hasFinished {
+        } else if photoController.manifests.count != 0 {
             return Int((photoController.manifests[sol] as! WHLManifest).photoCount)
         } else {
             return 0
@@ -245,9 +257,15 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let photoId = (self.photoController.photos[indexPath.item] as! Photo).photoID
-        if let op = operationsDict[photoId] {
-            op.cancel()
+        // Initial Bug: This method gets called on launch for whatever reason. My assumption is that the cells get loaded before getting customized, and once they get resized some are pushed out of view and therefore dequeued.
+
+        // Check if we have any cells to cancel and then use this array to cancel all the cells.
+        if cancelCells.count != 0 {
+            let photoId = cancelCells[indexPath.item].photoID
+            if let op = operationsDict[photoId] {
+                op.cancel()
+            }
         }
+
     }
 }
